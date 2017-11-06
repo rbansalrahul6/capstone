@@ -22,7 +22,10 @@ def user_login(request):
 		if user:
 			if user.is_active:
 				login(request,user)
-				return HttpResponse('success')
+				if(user.utype == 'S'):
+					return HttpResponseRedirect('/student/')
+				else:
+					return HttpResponse('Success')
 			else:
 				return HttpResponse('account disabled')
 		else:
