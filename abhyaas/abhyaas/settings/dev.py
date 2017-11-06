@@ -20,3 +20,6 @@ DATABASES = {
 # ##### APPLICATION CONFIGURATION #########################
 
 INSTALLED_APPS = DEFAULT_APPS
+
+#############AUTHENTICATION ##########
+AUTH_USER_MODEL = 'login.BaseUser'
