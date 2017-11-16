@@ -48,6 +48,7 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'course_scheme',
 ]
 
 # Middlewares
