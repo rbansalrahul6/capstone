@@ -7,12 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('course_scheme', '0003_coursescheme_courses'),
+        ('college', '0001_initial'),
     ]
 
     operations = [
-        migrations.AlterUniqueTogether(
-            name='coursescheme',
-            unique_together=set([('batch', 'year', 'branch')]),
+        migrations.AlterField(
+            model_name='department',
+            name='short_name',
+            field=models.CharField(max_length=255, null=True, blank=True),
         ),
     ]

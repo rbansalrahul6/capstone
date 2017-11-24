@@ -49,6 +49,7 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
     'login',
     'course_scheme',
+    'college',
 ]
 
 # Middlewares

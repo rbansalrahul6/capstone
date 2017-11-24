@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from college.models import Branch,Department
 # Create your models here.
 
 class BaseUser(AbstractUser):
@@ -21,7 +22,7 @@ class Student(BaseUser):
 	def roll_no(self,obj):
 		return ("%s" % self.username)
 	roll_no.short_description = 'RollNo'
-	branch = models.CharField(max_length=5,blank=True)
+	branch = models.ForeignKey(Branch)
 	sem = models.CharField(max_length=10,blank=True)
 	#self.username.verbose_name='RollNo'
 
@@ -33,14 +34,12 @@ class Faculty(BaseUser):
 	def __init__(self,*args,**kwargs):
 		super(Faculty,self).__init__(*args,**kwargs)
 		self.utype = 'F'
-	dept = models.CharField(max_length=20)
+	dept = models.ForeignKey(Department)
 	desgn = models.CharField(max_length=20)
 
 	class Meta:
 		verbose_name='Faculty'
 		verbose_name_plural='Faculties'
 
-#Faculty._meta.get_field('username').verbose_name='Fid'
-#Student._meta.get_field('username').verbose_name='Roll No'
 
 

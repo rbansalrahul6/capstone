@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('course_scheme', '0005_auto_20171116_1342'),
+        ('course_scheme', '0005_auto_20171124_1828'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='coursescheme',
-            name='batch',
-            field=models.CharField(max_length=5, choices=[(b'2014', b'2014'), (b'2015', b'2015'), (b'2016', b'2016'), (b'2017', b'2017')]),
+            name='branch',
+            field=models.ForeignKey(to='college.Branch', to_field=b'branch_name'),
         ),
     ]
