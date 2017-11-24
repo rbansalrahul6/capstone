@@ -103,3 +103,4 @@ env/
 
 # other
 .idea/
+.Rhistory

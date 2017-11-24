@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Student Profile
+		</title>
+	</head>
+	<body>
+	<h1>Welcome Student</h1>
+	{% if user.is_authenticated %}
+		<p>Roll No: {{ user.username }}</p>
+		<p>First Name: {{ user.first_name }}</p>
+		<p>Last Name: {{ user.last_name }}</p>
+		<p>Branch: {{ Branch }}</p>
+	{% else %}
+		<p>Please login </p>
+	{% endif %}
+	</body>
+</html>
