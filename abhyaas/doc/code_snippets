@@ -1,0 +1,16 @@
+class Faculty(models.Model):
+	#short_name = models.CharField(max_length=255,primary_key=True)
+	faculty = models.ForeignKey(Faculty)
+	course_item = models.ForeignKey(CourseItem,on_delete=models.CASCADE)
+	lecture_group = models.ForeignKey(LectureGroup)
+	lab_groups = models.ManyToMany()  # can be made expandable / checkboxes
+	tut_groups = models.ManyToMany()  # can be made expandable / checkboxes
+
+	def __str__(self):
+		return self.faculty.name   
+
+
+# year_dropdown = []
+	# curr = datetime.datetime.now().year
+	# for y in range(curr-5,curr):
+	# 	year_dropdown.append((y,y))

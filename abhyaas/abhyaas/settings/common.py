@@ -48,7 +48,12 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+<<<<<<< HEAD
     'students',
+=======
+    'course_scheme',
+    'college',
+>>>>>>> course-module
 ]
 
 # Middlewares
