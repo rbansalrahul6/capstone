@@ -51,6 +51,7 @@ DEFAULT_APPS = [
     'students',
     'course_scheme',
     'college',
+    'import_export',
 ]
 
 # Middlewares
