@@ -7,22 +7,20 @@ from import_export.admin import ImportExportModelAdmin
 class BranchResource(resources.ModelResource):
 	class Meta:
 		model=Branch
+		import_id_fields = ('branch_code',)
 
 class BranchAdmin(ImportExportModelAdmin):
 	list_display = ('branch_code','branch_name')
 	resource_class=BranchResource
-	#import_id_fields = ('id',)
-	#exclude=('id',)
-	#skip_unchanged= True
-	#fields=['branch_code','branch_name',]
-
+	
 class DepartmentResource(resources.ModelResource):
 	class Meta:
 		model=Department
+		import_id_fields = ('department_name',)
 
 class DepartmentAdmin(ImportExportModelAdmin):
 	resource_class=DepartmentResource
-	import_id_fields = ('department_name',)
+	
 
 
 admin.site.register(Branch,BranchAdmin)

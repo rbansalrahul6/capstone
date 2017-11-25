@@ -104,3 +104,6 @@ env/
 # other
 .idea/
 .Rhistory
+
+*.DS_Store
+
