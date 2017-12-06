@@ -29,12 +29,12 @@ class FacultyInline(admin.StackedInline):
 
 class CourseSchemeAdmin(admin.ModelAdmin):
 	save_on_top = True
-	fields = ['batch','semester','branch','is_current']
+	fields = ['batch','semester','branch']
 	inlines = [CourseItemInline]
 
 class CourseItemAdmin(admin.ModelAdmin):
 	save_on_top = True
-	fields = ['course_scheme','course','course_type','remarks']
+	fields = ['course_scheme','course','course_type','remarks','is_current']
 	inlines = [FacultyInline]
 
 

@@ -9,7 +9,14 @@ from login.models import Student
 @login_required(login_url="/login/login/")
 def index(request):
 	context = RequestContext(request)
-	return render_to_response('students/student.html',{},context)
+	courses= None
+	if request.user.is_authenticated():
+		uname = request.user.username
+		student = Student.objects.get(username=uname)
+		courses = CourseStudentMap.objects.filter(branch=student.branch,batch=student.batch)
+	data = {"list":courses}
+	return render_to_response('students/student.html',data,context)
+	#return render_to_response('students/student.html',{},context)
 
 
 @login_required(login_url="/login/login/")
