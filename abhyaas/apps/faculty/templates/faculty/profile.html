@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Faculty Profile
+		</title>
+	</head>
+	<body>
+	<h1>Welcome Faculty</h1>
+	{% if user.is_authenticated %}
+		<p>First Name: {{ user.first_name }}</p>
+		<p>Last Name: {{ user.last_name }}</p>
+		<p>Department: {{ Dept }}</p>
+	{% else %}
+		<p>Please login </p>
+	{% endif %}
+	</body>
+</html>

@@ -83,7 +83,7 @@ class StudentAdmin(CommonAdmin):
 		(None,{'fields':()})
 		)'''
 	add_fieldsets = CommonAdmin.add_fieldsets + (
-		(None,{'classes':('wide',),'fields':('branch','username','password1','password2')}
+		(None,{'classes':('wide',),'fields':('branch','username','password1','password2','batch','semester')}
 			),
 		)
 	fieldsets =  (

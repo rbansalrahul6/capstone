@@ -52,6 +52,11 @@ DEFAULT_APPS = [
     'course_scheme',
     'college',
     'import_export',
+    'testapp',
+    'courses',
+    'django_messages',
+    'notifications',
+    'faculty'
 ]
 
 # Middlewares

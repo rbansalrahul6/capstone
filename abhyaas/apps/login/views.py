@@ -25,7 +25,7 @@ def user_login(request):
 				if(user.utype == 'S'):
 					return HttpResponseRedirect('/student/')
 				else:
-					return HttpResponse('Success')
+					return HttpResponseRedirect('/faculty/')
 			else:
 				return HttpResponse('account disabled')
 		else:

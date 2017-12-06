@@ -7,7 +7,7 @@ class Course(models.Model):
 	course_code = models.CharField(max_length=10,primary_key=True)
 	course_name = models.CharField(max_length=20)
 	# list of departments or pick automatically from course code
-
+	
 	def __str__(self):
 		return self.course_code
 
@@ -23,6 +23,7 @@ class CourseScheme(models.Model):
 	SEMESTER_CHOICES = tuple(zip(sem_list,sem_list))
 	semester = models.IntegerField(choices=SEMESTER_CHOICES,default=1)
 	branch = models.ForeignKey(Branch)
+	is_current=models.BooleanField(default=False)
 	
 
 	class Meta:

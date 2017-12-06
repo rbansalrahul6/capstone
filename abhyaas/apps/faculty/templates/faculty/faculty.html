@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<title>
-			Student Dashboard
+			Faculty Dashboard
 		</title>
 	</head>
 	<body>
-	<h1>Welcome Student</h1>
+	<h1>Welcome Faculty</h1>
 	{% if user.is_authenticated %}
 		<p>Welcome, {{ user.username }}.Thanks for logging in!</p>
 		<a href="{% url 'profile' %}">Profile</a>

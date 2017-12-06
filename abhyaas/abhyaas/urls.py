@@ -9,4 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/',include('login.urls')),
     url(r'^student/',include('students.urls')),
+    url(r'^faculty/',include('faculty.urls')),
+    url(r'^messages/', include('django_messages.urls')),
+    url(r'^synch/',include('testapp.urls')),
 )
