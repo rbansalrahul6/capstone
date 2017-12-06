@@ -54,8 +54,6 @@ DEFAULT_APPS = [
     'import_export',
     'testapp',
     'courses',
-    'django_messages',
-    'notifications',
     'faculty'
 ]
 
