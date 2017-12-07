@@ -31,3 +31,8 @@ class CourseFacultyMap(models.Model):
 	class Meta:
 		unique_together = ('course','faculty')
 
+class UploadMetadata(models.Model):
+	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
+	filename=models.CharField(max_length=50)
+	uploader=models.ForeignKey(Faculty,on_delete=models.CASCADE)		
+

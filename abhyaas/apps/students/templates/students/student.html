@@ -76,7 +76,7 @@
 
                     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Settings</a>
 
-                    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Logout</a>
+                    <a class="mdl-navigation__link" href="/logout"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Logout</a>
 
                 </nav>
             </div>
@@ -85,7 +85,7 @@
 
             <main class="mdl-layout__content mdl-color--grey-100">
                 {%for item in list%} 
-                    <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing demo-card-square mdl-card">
+                    <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing demo-card-square mdl-card myBox">
                         <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col  mdl-cell--4-col-tablet   mdl-cell--12-col-desktop">
                             <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
                                 <h2 class="mdl-card__title-text">{{item.course.course_name}}</h2>
@@ -95,7 +95,9 @@
                                 {{item.course.course_code}}
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                <a href="course_page.html" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+                                <a href= "{% url 'coursepage' %}?code={{ item.course.course_code }}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+                                <!--
+                                passes two parameters: <a href= "{% url 'coursepage' %}?code={{ item.course.course_code }}&name=aaish" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>-->
                             </div>
                         </div>
                         <div class="demo-separator mdl-cell--1-col"></div>                    

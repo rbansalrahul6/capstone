@@ -41,3 +41,10 @@ def show_courses(request):
 	data = {"list":courses}
 	return render_to_response('students/mycourses.html',data,context)
 
+@login_required(login_url="/login/login/")
+def course_page(request):
+	context = RequestContext(request)
+	print request.GET.get("code")
+	return render_to_response('students/course_page.html',{},context)
+
+
