@@ -8,9 +8,12 @@
 
 
 <body>
-    <form id="upload_form" method="post" action="" enctype="multipart/form-data">
-        {{ upload_form.as_p }}
-        <!--<input type="submit" name="submit" value="" />-->
+    <form id="upload_form" method="post" enctype="multipart/form-data">
+    	{% csrf_token %}
+        <input type="file" name="myfile">
+    	<button type="submit">Upload</button>
     </form>
 </body>
 </html>
+
+<!--ction="/courses/?code={{ code }}"-->

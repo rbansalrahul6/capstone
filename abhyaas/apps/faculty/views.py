@@ -5,17 +5,21 @@ from django.conf import settings
 from courses.models import CourseFacultyMap
 from login.models import Faculty
 from faculty.forms import UploadFileForm
+from courses import views as course_views
+import os
+import dropbox
+from utils.file_utils import upload_to_dropbox,check,create_folder
 # Create your views here.
 @login_required(login_url="/login/login/")
 def index(request):
 	context = RequestContext(request)
-	courses= None
-	if request.user.is_authenticated():
-		uname = request.user.username
-		fac = Faculty.objects.get(username=uname)
-		courses = CourseFacultyMap.objects.filter(faculty=fac)
-	data = {"list":courses}
-	return render_to_response('faculty/faculty.html',data,context)
+	# courses= None
+	# if request.user.is_authenticated():
+	# 	uname = request.user.username
+	# 	fac = Faculty.objects.get(username=uname)
+	# 	courses = CourseFacultyMap.objects.filter(faculty=fac)
+	# data = {"list":courses}
+	return render_to_response('faculty/sidebar.html',{},context)
 
 
 @login_required(login_url="/login/login/")
@@ -32,26 +36,36 @@ def get_profile(request):
 @login_required(login_url="/login/login/")
 def course_page(request):
 	context = RequestContext(request)
-	data={"course_code":request.GET.get("code")}
-	return render_to_response('faculty/course_page.html',data,context)
+	course_page_view = course_views.index(request)
+	course_page_view.render()
+	data=course_page_view.context_data
+	return render_to_response('faculty/course_details.html',data,context)
 
 @login_required(login_url="/login/login/")
 def show_courses(request):
 	context = RequestContext(request)
-	courses= None
-	if request.user.is_authenticated():
-		uname = request.user.username
-		fac = Faculty.objects.get(username=uname)
-		courses = CourseFacultyMap.objects.filter(faculty=fac)
-	data = {"list":courses}
+	course_view = course_views.show_courses(request,Faculty,CourseFacultyMap)
+	course_view.render()
+	data = course_view.context_data
 	return render_to_response('faculty/mycourses.html',data,context)
+
+#dropbox data
+access_token = 'oWw_iYHAydcAAAAAAAAA1UQIMnh-LpfBDd9mnqNlNcfTg5dCdepmD42C2htSajap'
+dbx = dropbox.Dropbox(access_token)
 
 @login_required(login_url="/login/login/")
 def upload(request):
-	context = RequestContext(request)
-	if request.method=='POST':
-		upload_form=UploadFileForm(data=request.POST)
-	else:
-		upload_form=UploadFileForm()	
-	return render_to_response('faculty/upload.html',{'upload_form':upload_form},context)
+	myfile = None
+	if request.method=='POST' and request.FILES['myfile']:
+		myfile = request.FILES['myfile']
+		filename = myfile.name
+		print filename
+	course_code = request.GET.get('code')
+	print course_code
+	if myfile is not None:
+		if not check(dbx,course_code):
+			create_folder(dbx,course_code)
+		result = upload_to_dropbox(dbx,myfile,folder=course_code)
+		print result
+	return render(request,'faculty/upload.html')
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upload</title>
+</head>
+
+
+<body>
+    <form id="upload_form" method="post" action="/courses/?code={{ code }}&filename={{ upload_form.file.filename }}" enctype="multipart/form-data">
+    	{% csrf_token %}
+        {{ upload_form.as_p }}
+        <input type="submit" name="submit" action=""value="Upload" />
+    </form>
+</body>
+</html>
