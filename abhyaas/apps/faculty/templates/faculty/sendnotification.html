@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Send a Notification
+		</title>
+	</head>
+	<body>
+	<h1>What to send</h1>
+	{% if user.is_authenticated %}
+		<form id="notifyform" method="post" enctype="multipart/form-data">
+    		{% csrf_token %}
+        	{{ notify_form.as_p }}
+        	<input type="submit" name="submit" action="" value="Send" />
+    	</form>
+	{% else %}
+	{% endif %}
+	</body>
+</html>

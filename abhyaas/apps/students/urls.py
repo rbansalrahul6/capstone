@@ -5,4 +5,5 @@ urlpatterns = [
 	url(r'^$',views.index,name='index'),
 	url(r'^profile/$',views.get_profile,name='profile'),
 	url(r'^mycourses/$',views.show_courses,name='showcourses'),
+	url(r'^mynotifications/$',views.show_notifications,name='shownotifications'),
 ]

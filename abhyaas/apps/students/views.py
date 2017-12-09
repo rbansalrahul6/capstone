@@ -34,3 +34,15 @@ def show_courses(request):
 	data = {"list":courses}
 	return render_to_response('students/mycourses.html',data,context)
 
+@login_required(login_url="/login/login/")
+def show_notifications(request):
+	context = RequestContext(request)
+	notif= None
+	if request.user.is_authenticated():
+		user=Student.objects.get(username=request.user.username)
+		notif=user.notifications.unread()
+		notif2=user.notifications.read()
+		user.notifications.mark_all_as_read(user)
+	data = {"unreadlist":notif,"readlist":notif2}
+	return render_to_response('students/mynotifications.html',data,context)	
+

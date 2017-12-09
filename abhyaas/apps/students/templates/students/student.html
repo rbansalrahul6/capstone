@@ -4,13 +4,25 @@
 		<title>
 			Student Dashboard
 		</title>
+		{% load notifications_tags %}
+		{% load static %}
+		<script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+		{% register_notify_callbacks callbacks='fill_notification_badge' %}
 	</head>
 	<body>
 	<h1>Welcome Student</h1>
 	{% if user.is_authenticated %}
+		{% notifications_unread as unread_count %}
 		<p>Welcome, {{ user.username }}.Thanks for logging in!</p>
 		<a href="{% url 'profile' %}">Profile</a>
 		<a href="{% url 'showcourses' %}">Show my courses</a>
+		
+		{% if live_notify_badge %}
+    		You have <strong>{{ live_notify_badge }}</strong> unread notifications.
+		{% endif %}
+		<h2>Here</h2>
+		{% live_notify_badge %}
+		<a href="{% url 'shownotifications' %}">Show my notifications</a>
 	{% else %}
 		<a href="/login/login">Login Here </a>
 	{% endif %}

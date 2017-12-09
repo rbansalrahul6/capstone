@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+import notifications.urls
 
 urlpatterns = patterns('',
     # Examples:
@@ -11,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^student/',include('students.urls')),
     url(r'^faculty/',include('faculty.urls')),
     url(r'^synch/',include('testapp.urls')),
+    url('^inbox/notifications/', include(notifications.urls, namespace='notifications'))
 )

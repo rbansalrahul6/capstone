@@ -31,3 +31,9 @@ class CourseFacultyMap(models.Model):
 	class Meta:
 		unique_together = ('course','faculty')
 
+class CourseNotification(models.Model):
+	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
+	message=models.CharField(max_length=90)
+	description=models.TextField()
+	time=models.DateTimeField(auto_now_add=True)
+	sender=models.ForeignKey(Faculty)

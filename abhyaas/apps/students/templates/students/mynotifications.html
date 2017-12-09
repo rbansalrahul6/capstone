@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Student Notifications
+		</title>
+		{% load notifications_tags %}
+		{% load static %}
+		<script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+		{% register_notify_callbacks callbacks='fill_notification_list' %}
+	</head>
+	<body>
+	<h1>Your Courses</h1>
+	{% if user.is_authenticated %}
+		{% live_notify_list %}
+		<!--{%for item in unreadlist%}
+        	<li>{{item}}</li>
+    	{% endfor %}-->
+    	{%for item in readlist%}
+        	<li>{{item}}</li>
+    	{% endfor %}
+	{% else %}
+	{% endif %}	
+	</body>
+</html>

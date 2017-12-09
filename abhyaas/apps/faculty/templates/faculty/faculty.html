@@ -11,6 +11,7 @@
 		<p>Welcome, {{ user.username }}.Thanks for logging in!</p>
 		<a href="{% url 'profile' %}">Profile</a>
 		<a href="{% url 'showcourses' %}">Show my courses</a>
+		<a href="{% url 'sendnotification' %}">Send a notification</a>
 	{% else %}
 		<a href="/login/login">Login Here </a>
 	{% endif %}

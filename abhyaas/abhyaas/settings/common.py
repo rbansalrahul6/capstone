@@ -54,7 +54,8 @@ DEFAULT_APPS = [
     'import_export',
     'testapp',
     'courses',
-    'faculty'
+    'faculty',
+    'notifications'
 ]
 
 # Middlewares
