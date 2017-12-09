@@ -24,10 +24,10 @@ def synch(request):
 		year_choices.append(y)
 	for y in year_choices:
 		sem=currentsem(y)
-		synch_course_schemes=CourseScheme.objects.filter(batch=y,semester=sem,is_current=False)
+		synch_course_schemes=CourseScheme.objects.filter(batch=y,semester=sem)
 		for curr_scheme in synch_course_schemes:
 			print curr_scheme
-			synch_courseitem=CourseItem.objects.filter(course_scheme=curr_scheme)
+			synch_courseitem=CourseItem.objects.filter(course_scheme=curr_scheme,is_current=False)
 			for curr_courseitem in synch_courseitem:
 				ccobject=CurrentCourse(course_code=
 						curr_courseitem.course.course_code,course_name=
@@ -35,15 +35,25 @@ def synch(request):
 				if not CurrentCourse.objects.filter(course_code=curr_courseitem.course.course_code).exists():
 					print "course added"
 					ccobject.save()
-				CourseStudentMap(course=ccobject,batch=
-				curr_courseitem.course_scheme.batch,branch=
-				curr_courseitem.course_scheme.branch).save()
+
+				csm=CourseStudentMap(course=ccobject,batch=
+					curr_courseitem.course_scheme.batch,branch=
+					curr_courseitem.course_scheme.branch)
+
+				if not CourseStudentMap.objects.filter(course=ccobject,batch=
+					curr_courseitem.course_scheme.batch,branch=
+					curr_courseitem.course_scheme.branch).exists():
+						csm.save()
 
 				faculties=FacultyMapping.objects.filter(course_item=curr_courseitem)
 				for curr_faculty in faculties:
-					CourseFacultyMap(course=ccobject,faculty=curr_faculty.faculty).save()
-			curr_scheme.is_current=True
-			curr_scheme.save()			
+					cfm=CourseFacultyMap(course=ccobject,faculty=curr_faculty.faculty)
+					if not CourseFacultyMap.objects.filter(course=ccobject,
+						faculty=curr_faculty.faculty).exists():
+							cfm.save()
+
+				curr_courseitem.is_current=True
+				curr_courseitem.save()			
 
 				
 

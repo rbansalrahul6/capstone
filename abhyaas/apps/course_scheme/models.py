@@ -5,7 +5,7 @@ import datetime
 # Create your models here.
 class Course(models.Model):
 	course_code = models.CharField(max_length=10,primary_key=True)
-	course_name = models.CharField(max_length=20)
+	course_name = models.CharField(max_length=50)
 	# list of departments or pick automatically from course code
 	
 	def __str__(self):
@@ -23,7 +23,6 @@ class CourseScheme(models.Model):
 	SEMESTER_CHOICES = tuple(zip(sem_list,sem_list))
 	semester = models.IntegerField(choices=SEMESTER_CHOICES,default=1)
 	branch = models.ForeignKey(Branch)
-	is_current=models.BooleanField(default=False)
 	
 
 	class Meta:
@@ -39,6 +38,7 @@ class CourseItem(models.Model):
 	course_type = models.CharField(max_length=1,choices=COURSE_TYPES,default='R')
 	remarks = models.CharField(max_length=255,null=True,blank=True)
 	course_scheme = models.ForeignKey(CourseScheme,on_delete=models.CASCADE)
+	is_current=models.BooleanField(default=False)
 
 
 ####### FOR TESTING OF FACULTY MAPPING #########

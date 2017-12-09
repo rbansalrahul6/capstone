@@ -1,18 +1,48 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> Login Page </title>
-    </head>
+<html lang="en">
 
-    <body>
-        <h1> login to Abhyaas </h1>
-        <form id="login_form" method="post" action="/login/login/">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
+<head>
+    <meta charset="utf-8">
+    <title>Login to Abhyaas</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static "login/logincss.css" %}">
+    <script src="{% static "login/js/login.js" %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<!-- style="width:304px;height:228px;">-->
+
+<body>
+    <div class="container">
+        
+        
+            
+            <img src="{% static "login/1.png" %}" alt="Logo" style="width:96px;height:80px;margin-right:2%;margin-top:5%; margin-left:37%" align="middle">
+
+            <img src="{% static "login/nameabhyaas.png" %}" alt="Name" style="width:192px;height:128px; margin-top:6%;" align="middle" >
+     
+        <div class="login-box animated fadeInUp">           
+            <div class="box-header">
+                <h2>Log In</h2>
+            </div>
+            <form id="login_form" method="post" action="/login/login/">
+                {% csrf_token %}
+                Username: <input type="text" name="username" value="" size="30" />
+                <br/>
+                Password: <input type="password" name="password" value="" size="30" />
+                <br/>
+            <!--<input type="submit" value="Login"/>
+            </form>-->
+            <button type="btn btn-secondary" onclick="validate()">
+                Sign In
+            </button>
             <br/>
-            Password: <input type="password" name="password" value="" size="50" />
-            <br/>
-        <input type="submit" value="Login"/>
-        </form>
-    </body>
+            </form>            
+            <!--<a href="#">
+                <p class="small">Forgot your password?</p>
+            </a>-->
+        </div>
+    </div>
+</body>
 </html>

@@ -120,6 +120,9 @@ STATIC_URL = '/static/'
 
 # The URL for media files
 MEDIA_URL = '/media/'
+LOGIN_URL='/login/login/'
+LOGOUT_URL = '/login/login/'
+
 
 
 # ##### DEBUG CONFIGURATION ###############################

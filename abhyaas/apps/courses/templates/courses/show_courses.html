@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			User Courses
+		</title>
+	</head>
+	<body>
+	<h1>Your Courses</h1>
+	{% if user.is_authenticated %}
+		{%for item in list%}
+        <li>{{item.course.course_code}} {{item.course.course_name}}</li>
+    	{% endfor %}
+	{% else %}
+		<a href="/login/login">Login Here </a>
+	{% endif %}	
+	</body>
+</html>

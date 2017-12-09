@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from login.views import logout_view
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -11,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^student/',include('students.urls')),
     url(r'^faculty/',include('faculty.urls')),
     url(r'^synch/',include('testapp.urls')),
+    url(r'^courses/',include('courses.urls')),
+    url(r'logout/',logout_view,name='logout_the_user'),
 )

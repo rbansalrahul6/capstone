@@ -4,12 +4,20 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from courses.models import CourseStudentMap
 from login.models import Student
+from courses import views as course_views
 
 # Create your views here.
 @login_required(login_url="/login/login/")
 def index(request):
 	context = RequestContext(request)
-	return render_to_response('students/student.html',{},context)
+	# courses= None
+	# if request.user.is_authenticated():
+	# 	uname = request.user.username
+	# 	student = Student.objects.get(username=uname)
+	# 	courses = CourseStudentMap.objects.filter(branch=student.branch,batch=student.batch)
+	# data = {"list":courses}
+	return render_to_response('students/sidebar.html',{},context)
+	#return render_to_response('students/student.html',{},context)
 
 
 @login_required(login_url="/login/login/")
@@ -26,11 +34,15 @@ def get_profile(request):
 @login_required(login_url="/login/login/")
 def show_courses(request):
 	context = RequestContext(request)
-	courses= None
-	if request.user.is_authenticated():
-		uname = request.user.username
-		student = Student.objects.get(username=uname)
-		courses = CourseStudentMap.objects.filter(branch=student.branch,batch=student.batch)
-	data = {"list":courses}
-	return render_to_response('students/mycourses.html',data,context)
+	course_view = course_views.show_courses(request,Student,CourseStudentMap)
+	course_view.render()
+	return render_to_response('students/mycourses.html',course_view.context_data,context)
+
+@login_required(login_url="/login/login/")
+def course_page(request):
+	context = RequestContext(request)
+	course_page_view = course_views.index(request)
+	course_page_view.render()
+	return render_to_response('students/course_page.html',course_page_view.context_data,context)
+
 
