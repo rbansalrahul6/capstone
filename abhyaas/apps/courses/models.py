@@ -34,5 +34,12 @@ class CourseFacultyMap(models.Model):
 class UploadMetadata(models.Model):
 	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
 	filename=models.CharField(max_length=50)
-	uploader=models.ForeignKey(Faculty,on_delete=models.CASCADE)		
+	uploader=models.ForeignKey(Faculty,on_delete=models.CASCADE)	
+
+class CourseNotification(models.Model):
+ 	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
+ 	message=models.CharField(max_length=90)
+ 	description=models.TextField()
+ 	time=models.DateTimeField(auto_now_add=True)
+ 	sender=models.ForeignKey(Faculty)		
 

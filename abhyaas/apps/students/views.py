@@ -36,7 +36,10 @@ def show_courses(request):
 	context = RequestContext(request)
 	course_view = course_views.show_courses(request,Student,CourseStudentMap)
 	course_view.render()
-	return render_to_response('students/mycourses.html',course_view.context_data,context)
+	user=Student.objects.get(username=request.user.username)
+	data=course_view.context_data
+	data['unread_no']=len(user.notifications.unread())
+	return render_to_response('students/mycourses.html',data,context)
 
 @login_required(login_url="/login/login/")
 def course_page(request):

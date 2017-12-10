@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from login.views import logout_view
+import notifications.urls
 
 
 urlpatterns = patterns('',
@@ -15,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^synch/',include('testapp.urls')),
     url(r'^courses/',include('courses.urls')),
     url(r'logout/',logout_view,name='logout_the_user'),
+    url('^inbox/notifications/', include(notifications.urls, namespace='notifications'))
 )
