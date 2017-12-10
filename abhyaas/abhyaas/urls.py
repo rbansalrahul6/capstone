@@ -13,6 +13,6 @@ urlpatterns = patterns('',
     url(r'^student/',include('students.urls')),
     url(r'^faculty/',include('faculty.urls')),
     url(r'^synch/',include('testapp.urls')),
-    url(r'^courses/',include('courses.urls')),
+    url(r'^courses/',include('courses.urls',namespace='courses')),
     url(r'logout/',logout_view,name='logout_the_user'),
 )

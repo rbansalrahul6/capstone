@@ -18,9 +18,9 @@
                       <td>Tarunpreet Bhatia</td>
                       <td>{{cf.client_modified}}</td>
                       <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
+                        <a href="{% url 'courses:download' %}?code={{course_code}}&file={{cf.name}}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
                             Download
-                        </button>
+                        </a>
                       </td>
                     </tr>
                     {% endfor %}

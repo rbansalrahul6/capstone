@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
-from .forms import UploadFileForm
 import dropbox
-from utils.file_utils import check,list_files
+from utils.file_utils import check,list_files,download
+import utils.constants as constants
+import os
 # Create your views here.
 access_token = 'oWw_iYHAydcAAAAAAAAA1UQIMnh-LpfBDd9mnqNlNcfTg5dCdepmD42C2htSajap'
 dbx = dropbox.Dropbox(access_token)
@@ -18,17 +19,6 @@ def index(request):
 		course_files = list_files(dbx,course_code)
 	data = {'course_code':course_code,'course_files':course_files}
 	return TemplateResponse(request,'courses/course_page.html',data)
-
-
-def upload_file(request):
-	file_name = request.GET.get('filename')
-	course_code = request.GET.get('code')
-	if not check(dbx,course_code):
-		create_folder(dbx,course_code)
-
-	result = upload(dbx=dbx,fullname=file_name,folder=course_code,name=file_name)
-	print result
-	return HttpResponse('Successfully uploaded')
 
 @login_required(login_url="/login/login/")
 def show_courses(request,user_model,course_map):
@@ -45,16 +35,17 @@ def show_courses(request,user_model,course_map):
 	data = {"list":courses}
 	return TemplateResponse(request,'courses/list_courses.html',data)
 
-def upload_test(request):
-	if request.method=='POST':
-		upload_form = UploadFileForm(data=request.POST)
-		if upload_form.is_valid():
-			# process upload_from.cleaned_data
-			return 
-	else:
-		upload_form = UploadFileForm()
-	data = {'upload_form':upload_form}
-	return TemplateResponse(request,'courses/upload_file.html',data)
+def download_file(request):
+	course_code = request.GET.get('code')
+	filename = request.GET.get('file')
+	file_data = download(dbx,course_code,filename)
+	download_dir = constants.DOWNLOAD_DIR
+	course_dir = os.path.join(download_dir,course_code)
+	if not os.path.exists(course_dir):
+		os.makedirs(course_dir)
+	with open(os.path.join(course_dir,filename),'wb') as f:
+		f.write(file_data)
+	return HttpResponse('Download successful')
 
 
 

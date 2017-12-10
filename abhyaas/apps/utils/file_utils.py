@@ -59,3 +59,20 @@ def list_files(dbx,course_code):
 
 def add_time_diff(entry):
     entry.client_modified+=datetime.timedelta(0, 19800)
+
+def download(dbx, folder,name, subfolder=''):
+    """Download a file.
+    Return the bytes of the file, or None if it doesn't exist.
+    """
+    path = '/%s/%s/%s' % (folder, subfolder.replace(os.path.sep, '/'), name)
+    while '//' in path:
+        path = path.replace('//', '/')
+    with stopwatch('download'):
+        try:
+            md, res = dbx.files_download(path)
+        except dropbox.exceptions.HttpError as err:
+            print('*** HTTP error', err)
+            return None
+    data = res.content
+    print(len(data), 'bytes; md:', md)
+    return data
