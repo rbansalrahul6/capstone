@@ -69,3 +69,7 @@ def upload(request):
 		print result
 	return render(request,'faculty/upload.html')
 
+def show_announcement(request):
+	context=RequestContext(request)
+	return render_to_response('faculty/announcement_page.html',{},context)	
+

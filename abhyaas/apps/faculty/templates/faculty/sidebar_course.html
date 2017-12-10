@@ -26,20 +26,12 @@
 
         <link rel="shortcut icon" href="{% static "faculty/images/favicon.png" %}">
 
-        <script>
-            var main_page = ["Dashboard", "Settings", "Logout"];
-            var course_page = ["Course Notes", "Assignment", "Inbox", "Logout"];    
-        </script>
-
-        <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-        <!--
-        <link rel="canonical" href="http://www.example.com/">
-        -->
-
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
         <link rel="stylesheet" href="{% static "faculty/styles.css" %}">
+       
+        
         <style>
             #view-source {
             position: fixed;
@@ -71,21 +63,54 @@
                 <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">dashboard</i>Dashboard</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">import_contacts</i>Course Material</a>
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation" >inbox</i><span class="mdl-badge" data-badge="4">Inbox</span></a>       
+                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation" >assignment</i>Assignments</span></a>       
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">settings</i>Settings</a>
+                    <a class="mdl-navigation__link" href="{% url 'faculty:showannouncement' %}?code={{ course_code }}"><i class="material-icons" role="presentation">notifications</i>Announcements</a>
 
-                    <a class="mdl-navigation__link" href="/logout"><i class="material-icons">forum</i>Logout</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">info</i>About</a>
+
+                    <a class="mdl-navigation__link" href="/logout"><i class="material-icons">arrow_back</i>Logout</a>
 
                 </nav>
             </div>
-        <!-- course list here -->
-        {% block content %}
+            <main class="mdl-layout__content mdl-color--grey-100 demo-layout mdl-layout " width= 1100>
+                {% block content %}
         {% endblock %}
+        {% block fab %}
+        {% endblock %}
+            </main>
+            
+        <!-- course list here -->
+        
         </div>
-        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+         
+        <dialog id="new-message" class="mdl-dialog">
+            <h4 class="mdl-dialog__content">UCS402 New Message</h4>
+            <div class="mdl-dialog__content">
+              <!-- Textfield with Floating Label -->
+              <form >
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">                 
+                  <input class="mdl-textfield__input" type="text" id="sample3"></input>
+                  <label class="mdl-textfield__label" for="sample3">Subject...</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">                 
+                  <textarea class="mdl-textfield__input" type="text" rows="1" maxrows="3" id="sample2"></textarea>
+                  <label class="mdl-textfield__label" for="sample2">Message...</label>
+                </div>
+
+              </form>
+            </div>
+            <div class="mdl-dialog__actions">
+              <button type="button" class="mdl-button">Send</button>
+              <button type="button" class="mdl-button">Cancel</button>
+            </div>
+          </dialog> 
+          <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script type="text/javascript" src="{% static "faculty/myjs.js" %}"></script>
     {% endif %}    
     </body>
 </html>

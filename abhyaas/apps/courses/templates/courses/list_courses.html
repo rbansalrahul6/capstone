@@ -2,8 +2,13 @@
 {% load customfunc %}
 <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-grid row"> 
+
                  {%for item in list%} 
-                 <a href="{% url 'coursepage' %}?code={{ item.course.course_code }}" style="text-decoration: none;">
+                 {% ifequal user.utype "S" %}
+                 <a href="{% url 'students:coursepage' %}?code={{ item.course.course_code }}" style="text-decoration: none;">
+                 {% else %}
+                 <a href="{% url 'faculty:coursepage' %}?code={{ item.course.course_code }}" style="text-decoration: none;">
+                 {% endifequal %}
                     <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing demo-card-square mdl-card myBox">
                          <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col  mdl-cell--4-col-tablet   mdl-cell--12-col-desktop">
                          {% with forloop.counter0|modulo:6|add:1 as num %}

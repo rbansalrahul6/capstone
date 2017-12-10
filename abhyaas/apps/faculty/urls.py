@@ -7,4 +7,5 @@ urlpatterns = [
 	url(r'^mycourses/$',views.show_courses,name='showcourses'),
 	url(r'^course_page/$',views.course_page,name='coursepage'),
 	url(r'^upload/$',views.upload,name='upload'),
+	url(r'^announcement/$',views.show_announcement,name='showannouncement'),
 ]

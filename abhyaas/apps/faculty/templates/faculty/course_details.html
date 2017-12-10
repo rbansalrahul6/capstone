@@ -1,4 +1,14 @@
-{% extends 'faculty/sidebar.html' %}
+{% extends 'faculty/sidebar_course.html' %}
 {% block content %}
 {% include 'courses/course_page.html' %}
 {% endblock %}
+{% block fab %}
+
+              <a href="{% url 'faculty:upload' %}?code={{ course_code }}">      
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
+                  <i class="large material-icons icon-white">file_upload</i>
+                </button> 
+                </a>           
+              
+{% endblock %}
+
