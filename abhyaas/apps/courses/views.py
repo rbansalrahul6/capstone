@@ -4,8 +4,9 @@ from django.template import RequestContext
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
 import dropbox
-from utils.file_utils import check,list_files,download
+from utils.file_utils import check,list_files,download,get_download_link
 import utils.constants as constants
+from .models import CurrentCourse,UploadMetadata
 import os
 # Create your views here.
 access_token = 'oWw_iYHAydcAAAAAAAAA1UQIMnh-LpfBDd9mnqNlNcfTg5dCdepmD42C2htSajap'
@@ -14,9 +15,12 @@ dbx = dropbox.Dropbox(access_token)
 def index(request):
 	context = RequestContext(request)
 	course_code = request.GET.get('code')
-	course_files = None
-	if check(dbx,course_code):
-		course_files = list_files(dbx,course_code)
+	ccourse = CurrentCourse.objects.get(course_code=course_code)
+	files_metadata = UploadMetadata.objects.filter(course=ccourse)
+	course_files = []
+	for fm in files_metadata:
+		dlink = get_download_link(dbx,course_code,fm.filename)
+		course_files.append((fm,dlink))
 	data = {'course_code':course_code,'course_files':course_files}
 	return TemplateResponse(request,'courses/course_page.html',data)
 
@@ -35,17 +39,7 @@ def show_courses(request,user_model,course_map):
 	data = {"list":courses}
 	return TemplateResponse(request,'courses/list_courses.html',data)
 
-def download_file(request):
-	course_code = request.GET.get('code')
-	filename = request.GET.get('file')
-	file_data = download(dbx,course_code,filename)
-	download_dir = constants.DOWNLOAD_DIR
-	course_dir = os.path.join(download_dir,course_code)
-	if not os.path.exists(course_dir):
-		os.makedirs(course_dir)
-	with open(os.path.join(course_dir,filename),'wb') as f:
-		f.write(file_data)
-	return HttpResponse('Download successful')
+
 
 
 

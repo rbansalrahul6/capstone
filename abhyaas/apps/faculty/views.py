@@ -6,7 +6,9 @@ from courses.models import CourseFacultyMap
 from login.models import Faculty
 from faculty.forms import UploadFileForm
 from courses import views as course_views
+from courses.models import CurrentCourse,UploadMetadata
 import os
+import datetime
 import dropbox
 from utils.file_utils import upload_to_dropbox,check,create_folder
 # Create your views here.
@@ -61,11 +63,16 @@ def upload(request):
 		filename = myfile.name
 		print filename
 	course_code = request.GET.get('code')
-	print course_code
+	ccourse = CurrentCourse.objects.get(course_code=course_code)
+	faculty = Faculty.objects.get(username=request.user.username)
 	if myfile is not None:
 		if not check(dbx,course_code):
 			create_folder(dbx,course_code)
-		result = upload_to_dropbox(dbx,myfile,folder=course_code)
+		curr_time = datetime.datetime.now()
+		result = upload_to_dropbox(dbx,myfile,course_code,curr_time)
+		metadata = UploadMetadata(uploader=faculty,course=ccourse,
+			filename=myfile.name,upload_time=curr_time)
+		metadata.save()
 		print result
 	return render(request,'faculty/upload.html')
 

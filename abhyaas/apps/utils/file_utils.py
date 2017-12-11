@@ -26,7 +26,7 @@ def create_folder(dbx,name):
 	path = '/' + name
 	dbx.files_create_folder(path)
 
-def upload_to_dropbox(dbx, file, folder, subfolder='', overwrite=False):
+def upload_to_dropbox(dbx, file, folder,timestamp, subfolder='', overwrite=False):
     """Upload a file.
     Return the request response, or None in case of error.
     """
@@ -42,7 +42,7 @@ def upload_to_dropbox(dbx, file, folder, subfolder='', overwrite=False):
         try:
             res = dbx.files_upload(
                 data, path, mode,
-                client_modified=datetime.datetime.now(),
+                client_modified=timestamp,
                 mute=True)
         except dropbox.exceptions.ApiError as err:
             print('*** API error', err)
@@ -76,3 +76,13 @@ def download(dbx, folder,name, subfolder=''):
     data = res.content
     print(len(data), 'bytes; md:', md)
     return data
+
+def get_download_link(dbx,folder,file,subfolder=''):
+    path = os.path.join('/',folder,subfolder,file)
+    try:
+        res = dbx.files_get_temporary_link(path).link
+    except  dropbox.exceptions.ApiError as err:
+        print('API error',err)
+        return None
+    return res
+
