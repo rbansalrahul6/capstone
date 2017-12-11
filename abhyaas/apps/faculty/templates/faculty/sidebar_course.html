@@ -65,7 +65,7 @@
 
                     <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100" role="presentation">import_contacts</i>Course Material</a>
 
-                    <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100" role="presentation" >assignment</i>Assignments</span></a>       
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="{% url 'faculty:assignments' %}?code={{ course_code }}"><i class="material-icons mdl-color-text--grey-100" role="presentation" >assignment</i>Assignments</span></a>       
 
                     <a class="mdl-navigation__link mdl-color-text--grey-100" href="{% url 'faculty:showannouncement' %}?code={{ course_code }}"><i class="material-icons mdl-color-text--grey-100" role="presentation">notifications</i>Announcements</a>
 
@@ -75,7 +75,7 @@
 
                 </nav>
             </div>
-            <main class="mdl-layout__content mdl-color--grey-100 demo-layout mdl-layout " width= 1100>
+            <main class="mdl-layout__content mdl-color--grey-100" >
                 {% block content %}
         {% endblock %}
         {% block fab %}

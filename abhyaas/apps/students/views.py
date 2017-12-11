@@ -1,11 +1,12 @@
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from courses.models import CourseStudentMap
 from login.models import Student
 from courses import views as course_views
-
+from courses.models import CurrentCourse,Assignment,AssignmentSubmission
 # Create your views here.
 @login_required(login_url="/login/login/")
 def index(request):
@@ -48,4 +49,29 @@ def course_page(request):
 	course_page_view.render()
 	return render_to_response('students/course_page.html',course_page_view.context_data,context)
 
+def show_assignments(request):
+	course_code = request.GET.get('code')
+	ccourse = CurrentCourse.objects.get(course_code=course_code)
+	student = Student.objects.get(username=request.user.username)
+	assignments_list = Assignment.objects.filter(course=ccourse)
+	not_submitted = []
+	submitted = []
+	for a in assignments_list:
+		try:
+			asub = AssignmentSubmission.objects.get(student=student,assignment=a)
+			submitted.append(asub)
+		except AssignmentSubmission.DoesNotExist:
+			asub = None
+			not_submitted.append(a)
+	data = {'course_code':course_code,'submitted':submitted,'unsubmitted':not_submitted}
+	return render(request,'students/course_assignments.html',data)
+
+def submit_assignment(request):
+	course_code = request.GET.get('code')
+	aname = request.GET.get('aname')
+	ccourse = CurrentCourse.objects.get(course_code=course_code)
+	assignment = Assignment.objects.get(course=ccourse,name=aname)
+	student = Student.objects.get(username=request.user.username)
+	data = {'assgn':assignment,'course_code':course_code}
+	return render(request,'students/submit_assignment.html',data)
 

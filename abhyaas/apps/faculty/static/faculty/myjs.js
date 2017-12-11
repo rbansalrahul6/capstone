@@ -38,5 +38,8 @@ for (i = mid; i < end; i++) {
   }, 1 + (i * animationSpeed) / 3);
 }
 
+//js for file upload
+
+
 
 

@@ -1,0 +1,43 @@
+{% extends 'faculty/sidebar_course.html' %}
+{% block content %}
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" width=80%>
+                  <thead>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">Assignment</th>
+                      <th>Marks</th>
+                      <th>Uploaded By</th>
+                      <th>Deadline</th>
+                      <th>File</th>
+                    </tr>
+                  </thead>
+                  <!-- if statement to check empty list-->
+                  {% if assgn_list %}
+                  <tbody>
+                  <!-- loop start here-->
+                  {% for assgn in assgn_list %}
+                    <tr>
+                      <td class="mdl-data-table__cell--non-numeric">{{assgn.name}}</td>
+                      <td>{{assgn.max_marks}}</td>
+                      <td>{{assgn.uploader.first_name}}</td>
+                      <td>{{assgn.deadline}}</td>
+                      <td>
+                        <a href="/abcd">
+                            {{assgn.filename}}
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    <!--loop end here-->
+                  </tbody>
+                  {% endif %}
+                </table>               
+{% endblock %}
+{% block fab %}
+
+              <a href="{% url 'faculty:create_assignment' %}?code={{ course_code }}">      
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
+                  <i class="large material-icons icon-white">file_upload</i>
+                </button> 
+                </a>           
+              
+{% endblock %}

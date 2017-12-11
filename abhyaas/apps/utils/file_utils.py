@@ -50,15 +50,6 @@ def upload_to_dropbox(dbx, file, folder,timestamp, subfolder='', overwrite=False
     print('uploaded as', res.name.encode('utf8'))
     return res
 
-def list_files(dbx,course_code):
-    folder = '/' + course_code
-    files_list = dbx.files_list_folder(folder).entries
-    for entry in files_list:
-        add_time_diff(entry)
-    return files_list
-
-def add_time_diff(entry):
-    entry.client_modified+=datetime.timedelta(0, 19800)
 
 def get_download_link(dbx,folder,file,subfolder=''):
     path = os.path.join('/',folder,subfolder,file)

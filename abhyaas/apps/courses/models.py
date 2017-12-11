@@ -35,7 +35,10 @@ class UploadMetadata(models.Model):
 	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
 	filename=models.CharField(max_length=50)
 	uploader=models.ForeignKey(Faculty,on_delete=models.CASCADE)
-	upload_time = models.DateTimeField()	
+	upload_time = models.DateTimeField()
+
+	class Meta:
+		unique_together = ('course','filename')	
 
 class CourseNotification(models.Model):
  	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
@@ -45,11 +48,15 @@ class CourseNotification(models.Model):
  	sender=models.ForeignKey(Faculty)
 
 class Assignment(models.Model):
-	name = models.CharField(max_length=255,primary_key=True)
+	name = models.CharField(max_length=255)
 	course = models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
 	uploader = models.ForeignKey(Faculty,on_delete=models.CASCADE)
 	deadline = models.DateField()
 	filename = models.CharField(max_length=255)
+	instructions = models.TextField()
+	max_marks = models.PositiveIntegerField(default=0)
+	class Meta:
+			unique_together = ('course','name','filename')
 	def __str__(self):
 		return self.name	
 
@@ -59,11 +66,11 @@ class AssignmentSubmission(models.Model):
 	solution_file = models.CharField(max_length=255)
 	submit_date = models.DateField()
 	STATUS_CHOICES = (
-		('NS','Not Submitted'),
 		('S','Submitted'),
 		('E','Evaluated'),
 		)
 	status = models.CharField(max_length=2,choices=STATUS_CHOICES)
+	marks = models.PositiveIntegerField(default=0)
 	class Meta:
 		unique_together = ('student','assignment')	
 

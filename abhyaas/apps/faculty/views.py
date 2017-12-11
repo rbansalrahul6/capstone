@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from courses.models import CourseFacultyMap
 from login.models import Faculty
 from faculty.forms import UploadFileForm
-from courses.models import CurrentCourse,CourseNotification,CourseFacultyMap,CourseStudentMap,UploadMetadata
+from courses.models import CurrentCourse,CourseNotification,CourseFacultyMap,CourseStudentMap,UploadMetadata,Assignment
 from courses import views as course_views
 from login.models import Student,Faculty
 from notifications.signals import notify
@@ -67,6 +67,7 @@ def upload(request):
 		filename = myfile.name
 		print filename
 	course_code = request.GET.get('code')
+	data = {'course_code':course_code}
 	ccourse = CurrentCourse.objects.get(course_code=course_code)
 	faculty = Faculty.objects.get(username=request.user.username)
 	if myfile is not None:
@@ -78,7 +79,7 @@ def upload(request):
 			filename=myfile.name,upload_time=curr_time)
 		metadata.save()
 		print result
-	return render(request,'faculty/upload.html')
+	return render(request,'faculty/upload_file.html',data)
 
 @login_required(login_url="/login/login/")
 def show_announcement(request):
@@ -131,5 +132,39 @@ def send_announcement(request):
  	# 		except:
  	# 			list3.append(i)	
  	# 	print list_course
-		return render_to_response('faculty/newannounce.html',{"course_code":course_code},context)	
+		return render_to_response('faculty/newannounce.html',{"course_code":course_code},context)
+
+def assignments_list(request):
+	course_code = request.GET.get('code')
+	ccourse = CurrentCourse.objects.get(course_code=course_code)
+	assignments = Assignment.objects.filter(course=ccourse)
+	data = {'assgn_list':assignments,'course_code':course_code}
+	return 	render(request,'faculty/list_assignments.html',data)
+
+
+def create_assignment(request):
+	course_code = request.GET.get('code')
+	print course_code
+	afile = None
+	if request.method == 'POST' and request.FILES['afile']:
+ 		afile = request.FILES['afile']
+ 		aname = request.POST['aname']
+ 		mmarks = request.POST['mmarks']
+ 		ddate = request.POST['ddate']
+ 		insts = request.POST['insts']
+ 	if afile is not None:
+ 		ccourse = CurrentCourse.objects.get(course_code=course_code)
+		faculty = Faculty.objects.get(username=request.user.username)
+		if not check(dbx,course_code):
+			create_folder(dbx,course_code)
+		ass_folder = os.path.join(course_code,'assignments')
+		if not check(dbx,ass_folder):
+			create_folder(dbx,ass_folder)
+		result = upload_to_dropbox(dbx,afile,course_code,datetime.datetime.now(),subfolder='assignments')
+		assignment = Assignment(name=aname,course=ccourse,uploader=faculty,
+			deadline=ddate,filename=afile.name,instructions=insts,max_marks=mmarks)
+		assignment.save()
+		print result
+	data = {'course_code':course_code}
+ 	return render(request,'faculty/create_assignment.html',data)
 

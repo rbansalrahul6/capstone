@@ -3,6 +3,9 @@
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
+table {
+  width: 97%;
+}
 
 #view-source{
   position: fixed;

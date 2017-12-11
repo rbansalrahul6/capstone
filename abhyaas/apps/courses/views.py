@@ -6,7 +6,7 @@ from .models import CurrentCourse,UploadMetadata
 from django.contrib.auth.decorators import login_required,user_passes_test
 from .forms import UploadFileForm
 import dropbox
-from utils.file_utils import check,list_files,get_download_link
+from utils.file_utils import check,get_download_link
 # Create your views here.
 access_token = 'oWw_iYHAydcAAAAAAAAA1UQIMnh-LpfBDd9mnqNlNcfTg5dCdepmD42C2htSajap'
 dbx = dropbox.Dropbox(access_token)

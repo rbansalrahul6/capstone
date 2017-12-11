@@ -252,57 +252,32 @@ i.icon-white {
   color: white;
   background-color: #03A9F4; 
 }
-ul.breadcrumb {    
-    margin-left: -1px;
-    list-style: none;    
-}
-ul.breadcrumb li {
 
-    display: inline;
-    font-size: 18px;
-}
-ul.breadcrumb li+li:before {
-    padding: 8px;
-    color: #01447e;
-    content: ">";
-}
-ul.breadcrumb li a {
-    color: rgba(0, 0, 0, 0.54);
-    text-decoration: none;
-}
-ul.breadcrumb li a:hover {
-    color: #01447e;    
-}
 .myBox{
     display:inline-block;  
     color: rgba(0, 0, 0, 0.54);
     text-decoration: none;
 }
+
 #new-message{
   margin-top: 7%;
   margin-left: 12%;
   width: 600px;
   height: 400px;
 }
+
+#new-file{
+  margin-left: 22%;
+  margin-top: 7%;
+  width: 35%;
+  height: 40%;
+}
+
 #view-assign{
   margin-top: 3%;
-  margin-left: 3%;
+  margin-left: 7%;
   width: 75%;
   height: 85%;
-}
-.assign-new-button{
-  text-align: right;
-  margin-top:15%;
-}
-
-.text-snack{
-  text-align: center;
-
-
-.card-pos{
-  
-  margin-top:10%;
-
 }
 
 .text-pos{
@@ -315,5 +290,66 @@ ul.breadcrumb li a:hover {
 
 .assign-new-button{
   text-align: right;
+  margin-top:15%;
 }
+
+.text-snack{
+  text-align: center;
+}
+
+.card-pos{
+  margin-top:10%;
+
+}
+
+.file_input {
+  float: left;
+  margin-left: 4%;
+}
+
+
+#file_input_text_div {
+  width: 220px;
+  margin-top: -8px;
+  margin-left: 5px;
+}
+
+.none {
+  display: none;
+}
+
+
+#upload-id{
+  margin-left:42%; 
+  margin-bottom: 2%;
+}
+
+/* assignment upload */
+#new-assignment{
+  margin-top: 1%;
+  margin-left: 2%;
+  width: 77%;
+  height: 65%;
+}
+
+
+.instruct-pos{
+  width:90%;
+  margin-top: 2%;
+  margin-left: 8%;
+}
+
+#new-upload-id{
+  margin-left:50%; 
+  
+}
+
+
+#file_input_text_div_new {
+  width: 30%;
+  
+  margin-top: -8px;
+  margin-left: 5px;
+}
+
 
