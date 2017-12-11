@@ -54,24 +54,24 @@
             </header>
             <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
                 <header class="demo-drawer-header">
-                    <img src="{% static "faculty/images/user.jpg" %}" class="demo-avatar">
+                    <img src="{% static "faculty/images/abhyaas3.png" %}" class="demo-avatar">
                     <div class="demo-avatar-dropdown" text-align: center>
-                        <span align="center">{{ user.first_name }}</span>
+                        <span align="center"><h4>{{ user.first_name }}</h4></span>
                         <div class="mdl-layout-spacer"></div>                  
                     </div>
                 </header>
                 <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">import_contacts</i>Course Material</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100" role="presentation">import_contacts</i>Course Material</a>
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation" >assignment</i>Assignments</span></a>       
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100" role="presentation" >assignment</i>Assignments</span></a>       
 
-                    <a class="mdl-navigation__link" href="{% url 'faculty:showannouncement' %}?code={{ course_code }}"><i class="material-icons" role="presentation">notifications</i>Announcements</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="{% url 'faculty:showannouncement' %}?code={{ course_code }}"><i class="material-icons mdl-color-text--grey-100" role="presentation">notifications</i>Announcements</a>
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">info</i>About</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100">info</i>About</a>
 
-                    <a class="mdl-navigation__link" href="/logout"><i class="material-icons">arrow_back</i>Logout</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="/logout"><i class="material-icons mdl-color-text--grey-100">arrow_back</i>Logout</a>
 
                 </nav>
             </div>
@@ -93,7 +93,7 @@
               <form >
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">                 
-                  <input class="mdl-textfield__input" type="text" id="sample3"></input>
+                  <input class="mdl-textfield__input" type="text" id="sample3">
                   <label class="mdl-textfield__label" for="sample3">Subject...</label>
                 </div>
 

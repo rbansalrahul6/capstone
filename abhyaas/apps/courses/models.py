@@ -1,6 +1,6 @@
 from django.db import models
 from college.models import Branch
-from login.models import Faculty
+from login.models import Faculty,Student
 import datetime
 
 # Create your models here.
@@ -34,12 +34,38 @@ class CourseFacultyMap(models.Model):
 class UploadMetadata(models.Model):
 	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
 	filename=models.CharField(max_length=50)
-	uploader=models.ForeignKey(Faculty,on_delete=models.CASCADE)	
+	uploader=models.ForeignKey(Faculty,on_delete=models.CASCADE)
+	upload_time = models.DateTimeField()	
 
 class CourseNotification(models.Model):
  	course=models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
  	message=models.CharField(max_length=90)
  	description=models.TextField()
  	time=models.DateTimeField(auto_now_add=True)
- 	sender=models.ForeignKey(Faculty)		
+ 	sender=models.ForeignKey(Faculty)
+
+class Assignment(models.Model):
+	name = models.CharField(max_length=255,primary_key=True)
+	course = models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
+	uploader = models.ForeignKey(Faculty,on_delete=models.CASCADE)
+	deadline = models.DateField()
+	filename = models.CharField(max_length=255)
+	def __str__(self):
+		return self.name	
+
+class AssignmentSubmission(models.Model):
+	assignment = models.ForeignKey(Assignment)
+	student = models.ForeignKey(Student,on_delete=models.CASCADE)
+	solution_file = models.CharField(max_length=255)
+	submit_date = models.DateField()
+	STATUS_CHOICES = (
+		('NS','Not Submitted'),
+		('S','Submitted'),
+		('E','Evaluated'),
+		)
+	status = models.CharField(max_length=2,choices=STATUS_CHOICES)
+	class Meta:
+		unique_together = ('student','assignment')	
+
+
 

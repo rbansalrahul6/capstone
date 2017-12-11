@@ -4,7 +4,7 @@
 {% endblock %}
 {% block fab %}
 				
-                <a href="">   
+                <a href="{% url 'faculty:newannouncement' %}?code={{ course_code }}">   
                 <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
                   <i class="large material-icons icon-white">message</i>
                 </button> 

@@ -26,10 +26,7 @@
 
         <link rel="shortcut icon" href="{% static "faculty/images/favicon.png" %}">
 
-        <script>
-            var main_page = ["Dashboard", "Settings", "Logout"];
-            var course_page = ["Course Notes", "Assignment", "Inbox", "Logout"];    
-        </script>
+
 
         <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
         <!--
@@ -62,22 +59,26 @@
             </header>
             <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
                 <header class="demo-drawer-header">
-                    <img src="{% static "faculty/images/user.jpg" %}" class="demo-avatar">
-                    <div class="demo-avatar-dropdown" text-align: center>
-                        <span align="center">{{ user.first_name }}</span>
+                    <img src="{% static "faculty/images/abhyaas3.png" %}" class="demo-avatar">
+                    <div class="demo-avatar-dropdown" style="text-align: center">
+                        <span align="center ">
+                         <h4>   {{ user.first_name }}</h4>
+                        </span>
                         <div class="mdl-layout-spacer"></div>                  
                     </div>
                 </header>
                 <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">dashboard</i>Dashboard</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100" role="presentation">dashboard</i>Dashboard</a>
+                    {% if unread_no %}
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="" id="inbox"><i class="material-icons mdl-color-text--grey-100" role="presentation" >email</i><span class="mdl-badge" data-badge="{{ unread_no }}">Inbox</span></a>
+                    {% else %}
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="" id="inbox"><i class="material-icons mdl-color-text--grey-100" role="presentation" >email</i><span class="mdl-badge">Inbox</span></a>        
+                    {% endif %}
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href=""><i class="material-icons mdl-color-text--grey-100" role="presentation">settings</i>Settings</a>
 
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation" >inbox</i><span class="mdl-badge" data-badge="4">Inbox</span></a>       
-
-                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">settings</i>Settings</a>
-
-                    <a class="mdl-navigation__link" href="/logout"><i class="material-icons">forum</i>Logout</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="/logout"><i class="material-icons mdl-color-text--grey-100">arrow_back</i>Logout</a>
 
                 </nav>
             </div>

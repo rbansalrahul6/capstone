@@ -12,15 +12,15 @@
                   {% if course_files %}
                   <tbody>
                   <!-- loop start here-->
-                  {% for cf in course_files %}
+                  {% for md,link in course_files %}
                     <tr>
-                      <td class="mdl-data-table__cell--non-numeric">{{cf.name}}</td>
-                      <td>Tarunpreet Bhatia</td>
-                      <td>{{cf.client_modified}}</td>
+                      <td class="mdl-data-table__cell--non-numeric">{{md.filename}}</td>
+                      <td>{{md.uploader.first_name}}</td>
+                      <td>{{md.upload_time}}</td>
                       <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
+                        <a href="{{link}}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
                             Download
-                        </button>
+                        </a>
                       </td>
                     </tr>
                     {% endfor %}

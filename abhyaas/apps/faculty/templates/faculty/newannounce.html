@@ -1,0 +1,35 @@
+{% extends 'faculty/sidebar_course.html' %}
+{% block content %}
+<div class="card-pos">
+
+              <div class="mdl-card mdl-shadow--6dp" id="new-message">
+
+                <div class="mdl-card__title mdl-color--blue-grey-900 mdl-color-text--grey-50">
+                  <h3 class="mdl-card__title-text">{{ course_code }} Announcement</h3>
+                </div>
+
+                <div class="mdl-card__supporting-text">
+                  <form id="announceform" method="post" enctype="multipart/form-data" action="{% url 'faculty:newannouncement' %}?code={{ course_code }}">
+		    		{% csrf_token %}
+                    <div class="mdl-textfield mdl-js-textfield text-pos">
+                      <input class="mdl-textfield__input" type="text" name="subject" />
+                      <label class="mdl-textfield__label" for="username">Subject</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield text-pos">
+                      <textarea class="mdl-textfield__input" type="password" name="message"></textarea>
+                      <label class="mdl-textfield__label" for="userpass">Message</label>
+                    </div>
+                <input type="hidden" value="{{ course_code }}" name="course_code">
+
+                <div class="mdl-card__actions mdl-card--border assign-new-button">
+                <a href="{% url 'faculty:showannouncement' %}?code={{ course_code }}">
+                  <button class="mdl-button  mdl-js-button mdl-js-ripple-effect" type="button">Cancel</button>
+                  </a>
+                  <button class="mdl-button  mdl-js-button mdl-js-ripple-effect" id="" type="submit" name="submit">Send</button>
+                </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+{% endblock %}

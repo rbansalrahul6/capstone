@@ -1,100 +1,61 @@
-
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
-#view-source{
-  position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-}
-
-.mdl-dialog {
-  border: none;
-  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
-  width: 400px; }
-  
-.mdl-dialog__title {
-  padding: 24px 24px 0;
-  margin: 0;
-  font-size: 2.5rem; }
-
-.mdl-dialog__actions {
-  padding: 8px 8px 8px 24px;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row-reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-
-.mdl-dialog__actions > * {
-  margin-right: 8px;
-  height: 36px; }
-  .mdl-dialog__actions > *:first-child {
-    margin-right: 0; }
-.mdl-dialog__actions--full-width {
-  padding: 0 0 8px 0; }
-  .mdl-dialog__actions--full-width > * {
-    height: 48px;
-    -webkit-flex: 0 0 100%;
-        -ms-flex: 0 0 100%;
-            flex: 0 0 100%;
-    padding-right: 16px;
-    margin-right: 0;
-    text-align: right; }
-
-.mdl-dialog__content {
-  padding: 20px 24px 24px 24px;
-  color: #616161;
- }
-
-.dark-overlay{
-  -webkit-transition: all 600ms cubic-bezier(0.200, 0.965, 0.000, 1.005);
-  transition: all 600ms cubic-bezier(0.200, 0.965, 0.000, 1.005);
-}
 
 #image-1{
   background-color: #26A69A;
 }
 #image-2{
-  background-color: #FBC02D;
+   background-color: #FBC02D;
 }
 #image-3{
-  background-color: #64B5F6;
+   background-color: #64B5F6;
 }
 #image-5{
-  background-color: #BA68C8;
+   background-color: #BA68C8;
 }
 #image-4{
-  background-color: #E57373;
+   background-color: #E57373;
 }
 #image-6{
-  background-color: #757575;
+   background-color: #757575;
 }
-
-
+.center_justify{
+  justify-content: center;
+ }
+ i.icon-white {
+     color: white;
+ }
 .demo-avatar {
   width: 200px;
   height: 180px;
   border-radius: 0px;  
-}
-.demo-layout .mdl-layout__header .mdl-layout__drawer-button {
-  color: rgba(0, 0, 0, 0.54);
 }
 .mdl-layout__drawer .avatar {
   margin-bottom: 16px;
 }
 .demo-drawer {
   border: none;
+}
+.selected{
+  background-color: #00BCD4;
 }
 /* iOS Safari specific workaround */
 .demo-drawer .mdl-menu__container {
@@ -124,7 +85,7 @@ html, body {
       -ms-flex-pack: end;
           justify-content: flex-end;
   padding: 16px;
-  height: 190px;
+  height: 170px;
 }
 .demo-avatar-dropdown {
   display: -webkit-flex;
@@ -146,6 +107,9 @@ html, body {
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
+.demo-layout .mdl-layout__header .mdl-layout__drawer-button {
+  color: rgba(0, 0, 0, 0.54);
+}
 .demo-layout .demo-navigation .mdl-navigation__link {
   display: -webkit-flex !important;
   display: -ms-flexbox !important;
@@ -163,9 +127,6 @@ html, body {
   background-color: #263238;
   color: #37474F;
 }
-.selected{
-  background-color: #00BCD4;
-}
 .demo-navigation .mdl-navigation__link .material-icons {
   font-size: 24px;
   color: rgba(255, 255, 255, 0.56);
@@ -175,12 +136,8 @@ html, body {
 .demo-content {
   max-width: 1080px;
 }
-.center_justify{
-  justify-content: center;
-}
-i.icon-white {
-    color: white;
-}
+
+
 
 
 .demo-cards {
@@ -192,7 +149,7 @@ i.icon-white {
           align-content: flex-start;
 }
 .demo-cards .demo-separator {
-  height: 1px;
+  height: 2px;
 }
 .demo-cards .mdl-card__title.mdl-card__title {
   color: white;
@@ -252,6 +209,11 @@ i.icon-white {
   color: white;
   background-color: #03A9F4; 
 }
+ul.breadcrumb li a {
+    color: rgba(0, 0, 0, 0.54);
+    text-decoration: none;
+}
+
 ul.breadcrumb {    
     margin-left: -1px;
     list-style: none;    
@@ -266,54 +228,18 @@ ul.breadcrumb li+li:before {
     color: #01447e;
     content: ">";
 }
+i.icon-white {
+    color: white;
+}
 ul.breadcrumb li a {
     color: rgba(0, 0, 0, 0.54);
     text-decoration: none;
 }
-ul.breadcrumb li a:hover {
+ul.breadcrumb li a:{
     color: #01447e;    
 }
 .myBox{
     display:inline-block;  
-    color: rgba(0, 0, 0, 0.54);
-    text-decoration: none;
-}
-#new-message{
-  margin-top: 7%;
-  margin-left: 12%;
-  width: 600px;
-  height: 400px;
-}
-#view-assign{
-  margin-top: 3%;
-  margin-left: 3%;
-  width: 75%;
-  height: 85%;
-}
-.assign-new-button{
-  text-align: right;
-  margin-top:15%;
 }
 
-.text-snack{
-  text-align: center;
-
-
-.card-pos{
-  
-  margin-top:10%;
-
-}
-
-.text-pos{
-  width: 600px;
-  margin-left: 9%;
-  margin-top: 2%;
-  margin-bottom: 1%;
-
-}
-
-.assign-new-button{
-  text-align: right;
-}
 

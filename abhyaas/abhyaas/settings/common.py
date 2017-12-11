@@ -144,6 +144,8 @@ USE_L10N = True
 # enable timezone awareness by default
 USE_TZ = True
 
+NOTIFICATIONS_USE_JSONFIELD=True
+
 
 # Finally grab the SECRET KEY
 try:

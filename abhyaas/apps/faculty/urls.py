@@ -8,4 +8,6 @@ urlpatterns = [
 	url(r'^course_page/$',views.course_page,name='coursepage'),
 	url(r'^upload/$',views.upload,name='upload'),
 	url(r'^announcement/$',views.show_announcement,name='showannouncement'),
+	url(r'^newannouncement/$',views.send_announcement,name='newannouncement'),
+	#url(r'^sendannouncement/$',views.send_announcement,name='sendannouncement'),
 ]
