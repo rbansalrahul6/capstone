@@ -1,3 +1,20 @@
-<main>
-
-</main>
+<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp" width=80%>
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Subject</th>
+                        <th>Sent By</th>
+                        <th>TimeStamp</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in notif %}
+                    <a href="">
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">{{ item.message }}</td>
+                        <td>{{ item.sender.first_name }} {{ item.sender.last_name }}</td>
+                        <td>{{ item.time }}</td>
+                      </tr>
+                    </a>
+                    {% endfor %}                      
+                    </tbody>
+                  </table>

@@ -213,7 +213,7 @@ i.icon-white {
 }
 .demo-cards .mdl-card__actions a {
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .demo-options h3 {
@@ -252,27 +252,7 @@ i.icon-white {
   color: white;
   background-color: #03A9F4; 
 }
-ul.breadcrumb {    
-    margin-left: -1px;
-    list-style: none;    
-}
-ul.breadcrumb li {
 
-    display: inline;
-    font-size: 18px;
-}
-ul.breadcrumb li+li:before {
-    padding: 8px;
-    color: #01447e;
-    content: ">";
-}
-ul.breadcrumb li a {
-    color: rgba(0, 0, 0, 0.54);
-    text-decoration: none;
-}
-ul.breadcrumb li a:hover {
-    color: #01447e;    
-}
 .myBox{
     display:inline-block;  
     color: rgba(0, 0, 0, 0.54);
@@ -281,8 +261,8 @@ ul.breadcrumb li a:hover {
 #new-message{
   margin-top: 7%;
   margin-left: 12%;
-  width: 600px;
-  height: 400px;
+  width: 55%;
+  height: 50%;
 }
 #view-assign{
   margin-top: 3%;
@@ -306,14 +286,17 @@ ul.breadcrumb li a:hover {
 }
 
 .text-pos{
-  width: 600px;
+  width: 90%;
   margin-left: 9%;
-  margin-top: 2%;
+  margin-top: 1%;
   margin-bottom: 1%;
 
 }
 
 .assign-new-button{
   text-align: right;
+}
+.dashtxt:hover {
+    text-decoration: underline;
 }
 

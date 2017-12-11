@@ -21,7 +21,7 @@ def index(request):
 	for fm in files_metadata:
 		dlink = get_download_link(dbx,course_code,fm.filename)
 		course_files.append((fm,dlink))
-	data = {'course_code':course_code,'course_files':course_files}
+	data = {'course_code':course_code,'course_files':course_files,'course_name':ccourse.course_name}
 	return TemplateResponse(request,'courses/course_page.html',data)
 
 

@@ -15,6 +15,26 @@ import os
 import dropbox
 from utils.file_utils import upload_to_dropbox,check,create_folder
 # Create your views here.
+
+# def getdesc_coursecode(notif):
+# 	list2=[]
+#  	for i in notif:
+#  		list2.append(i.encode('utf8'))
+#  	list3=[]
+#  	list_course=[]	
+#  	for i in list2:
+#  		try:
+#  			(m,n)=i.split('_',1)
+
+#  			list3.append(n)
+#  			list_course.append(m)
+#  		except:
+#  			list3.append(i)
+#  	return list_course,list3		
+
+ 		
+
+
 @login_required(login_url="/login/login/")
 def index(request):
 	context = RequestContext(request)
@@ -84,12 +104,14 @@ def upload(request):
 def show_announcement(request):
 	context=RequestContext(request)
 	course_code = request.GET.get('code')
-	return render_to_response('faculty/announcement_page.html',{"course_code":course_code},context)	
-
-@login_required(login_url="/login/login/")
-def new_announcement(request):
-	context=RequestContext(request)
-		
+	
+	user=Faculty.objects.get(username=request.user.username)
+	
+	course=CurrentCourse.objects.get(course_code=course_code)
+	notif=CourseNotification.objects.filter(course=course)
+	#unreadlist_course,unreadlist_desc=getdesc_coursecode(user.notifications.unread().values_list('description',flat=True))
+	data={"notif":notif,"course_code":course_code}
+	return render_to_response('faculty/announcement_page.html',data,context)	
 
 @login_required(login_url="/login/login/")
 def send_announcement(request):
@@ -131,5 +153,6 @@ def send_announcement(request):
  	# 		except:
  	# 			list3.append(i)	
  	# 	print list_course
+ 		ccourse=CurrentCourse.objects.get(course_code=course_code)
 		return render_to_response('faculty/newannounce.html',{"course_code":course_code},context)	
 

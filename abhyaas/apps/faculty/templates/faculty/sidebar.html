@@ -52,7 +52,7 @@
     <body>
         {% if user.is_authenticated %}
         <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-            <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+            <header class="demo-header mdl-layout__header mdl-color--blue-grey-800 mdl-color-text--grey-100">
                 <div class="mdl-layout__header-row">
                     <span class="mdl-layout-title"> {{ user.first_name }}'s Dashboard</span>                                     
                 </div>
@@ -62,7 +62,7 @@
                     <img src="{% static "faculty/images/abhyaas3.png" %}" class="demo-avatar">
                     <div class="demo-avatar-dropdown" style="text-align: center">
                         <span align="center ">
-                         <h4>   {{ user.first_name }}</h4>
+                         <h4>   {{ user.first_name }} {{ user.last_name }} </h4>
                         </span>
                         <div class="mdl-layout-spacer"></div>                  
                     </div>

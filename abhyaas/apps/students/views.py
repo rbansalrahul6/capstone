@@ -2,7 +2,7 @@ from django.shortcuts import render,render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
-from courses.models import CourseStudentMap
+from courses.models import CourseStudentMap,CurrentCourse,CourseNotification
 from login.models import Student
 from courses import views as course_views
 
@@ -48,4 +48,15 @@ def course_page(request):
 	course_page_view.render()
 	return render_to_response('students/course_page.html',course_page_view.context_data,context)
 
-
+@login_required(login_url="/login/login/")
+def show_announcement(request):
+	context=RequestContext(request)
+	course_code = request.GET.get('code')
+	
+	user=Student.objects.get(username=request.user.username)
+	
+	course=CurrentCourse.objects.get(course_code=course_code)
+	notif=CourseNotification.objects.filter(course=course)
+	#unreadlist_course,unreadlist_desc=getdesc_coursecode(user.notifications.unread().values_list('description',flat=True))
+	data={"notif":notif,"course_code":course_code}
+	return render_to_response('students/announcement_page.html',data,context)	

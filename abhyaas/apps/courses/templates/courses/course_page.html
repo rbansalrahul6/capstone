@@ -1,9 +1,9 @@
 
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" width=80%>
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" width=80%>
                   <thead>
                     <tr>
                       <th class="mdl-data-table__cell--non-numeric">File</th>
-                      <th>By</th>
+                      <th>Uploaded By</th>
                       <th>Date</th>
                       <th>Download</th>
                     </tr>
@@ -15,11 +15,11 @@
                   {% for md,link in course_files %}
                     <tr>
                       <td class="mdl-data-table__cell--non-numeric">{{md.filename}}</td>
-                      <td>{{md.uploader.first_name}}</td>
+                      <td>{{md.uploader.first_name}} {{md.uploader.last_name}}</td>
                       <td>{{md.upload_time}}</td>
                       <td>
-                        <a href="{{link}}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
-                            Download
+                        <a href="{{link}}">
+                            <i class="material-icons">file_download</i>
                         </a>
                       </td>
                     </tr>
