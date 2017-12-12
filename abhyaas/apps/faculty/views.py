@@ -16,22 +16,21 @@ import dropbox
 from utils.file_utils import upload_to_dropbox,check,create_folder
 # Create your views here.
 
-# def getdesc_coursecode(notif):
-# 	list2=[]
-#  	for i in notif:
-#  		list2.append(i.encode('utf8'))
-#  	list3=[]
-#  	list_course=[]	
-#  	for i in list2:
-#  		try:
-#  			(m,n)=i.split('_',1)
+def getdesc_coursecode(notif):
+	list2=[]
+ 	for i in notif:
+ 		list2.append(i.encode('utf8'))
+ 	list3=[]
+ 	list_course=[]	
+ 	for i in list2:
+ 		try:
+ 			(m,n)=i.split('_',1)
 
-#  			list3.append(n)
-#  			list_course.append(m)
-#  		except:
-#  			list3.append(i)
-#  	return list_course,list3		
-
+ 			list3.append(n)
+ 			list_course.append(m+" "+CurrentCourse.objects.get(course_code=m).course_name)
+ 		except:
+ 			list3.append(i)
+ 	return list_course,list3	
  		
 
 
@@ -109,27 +108,62 @@ def show_announcement(request):
 	
 	course=CurrentCourse.objects.get(course_code=course_code)
 	notif=CourseNotification.objects.filter(course=course)
+	ccourse=CurrentCourse.objects.get(course_code=course_code)
 	#unreadlist_course,unreadlist_desc=getdesc_coursecode(user.notifications.unread().values_list('description',flat=True))
-	data={"notif":notif,"course_code":course_code}
-	return render_to_response('faculty/announcement_page.html',data,context)	
+	data={"notif":notif,"course_code":course_code,"course_name":ccourse.course_name}
+	return render_to_response('faculty/announcement_page.html',data,context)
+
+@login_required(login_url="/login/login/")
+def show_inbox(request):
+	context=RequestContext(request)
+	user=Faculty.objects.get(username=request.user.username)
+	unreadlist_course,unreadlist_desc=getdesc_coursecode(user.notifications.unread()
+		.values_list('description',flat=True))
+	unreadlist_otherfields=user.notifications.unread()
+	readlist_course,readlist_desc=getdesc_coursecode(user.notifications.read()
+		.values_list('description',flat=True))
+	readlist_otherfields=user.notifications.read()
+	print unreadlist_course,unreadlist_desc,unreadlist_desc
+	# data={"notif":notif,"course_code":course_code,"course_name":ccourse.course_name}
+	# return render_to_response('faculty/announcement_page.html',data,context)	
+
+@login_required(login_url="/login/login/")
+def show_inbox(request):
+	context=RequestContext(request)
+	user=Faculty.objects.get(username=request.user.username)
+	unreadlist_course,unreadlist_desc=getdesc_coursecode(user.notifications.unread()
+		.values_list('description',flat=True))
+	unreadlist_otherfields=user.notifications.unread()
+	unread_no=len(unreadlist_otherfields)
+	readlist_course,readlist_desc=getdesc_coursecode(user.notifications.read()
+		.values_list('description',flat=True))
+	readlist_otherfields=user.notifications.read()
+	read_no=len(readlist_otherfields)
+	unread_zip=zip(unreadlist_course,unreadlist_desc,unreadlist_otherfields)
+	read_zip=zip(readlist_course,readlist_desc,readlist_otherfields)
+	user.notifications.mark_all_as_read()
+	print unreadlist_course,unreadlist_desc,unreadlist_otherfields,unread_zip
+	print type(unreadlist_course),type(unreadlist_desc),type(unreadlist_otherfields),type(unread_zip)
+	return render_to_response('faculty/inbox.html',{"unread_zip":unread_zip,"read_zip":read_zip},context)		
 
 @login_required(login_url="/login/login/")
 def send_announcement(request):
 	context=RequestContext(request)
+	course_code = request.GET.get('code')
 	if request.method == 'POST':
 			print "here"
 			subj= request.POST['subject']
 			msg= request.POST['message']
-			send_to= request.POST['course_code']
+			send_to= course_code
 			linkedcourse=CurrentCourse.objects.get(course_code=send_to)
 			CourseNotification(course=linkedcourse,
-				message=msg,sender=Faculty.objects.get(username
+				message=subj,sender=Faculty.objects.get(username
 					=request.user.username),description=msg).save()
 			
 			linkedbatch=CourseStudentMap.objects.filter(course=linkedcourse)
 			for b in linkedbatch:
 				linkedstu=Student.objects.filter(batch=b.batch,branch=b.branch)
-				notify.send(request.user, recipient=linkedstu, verb=subj, description=msg)
+				notify.send(request.user, recipient=linkedstu, verb=subj, description=send_to+"_"+msg)
 			linkedfac=CourseFacultyMap.objects.filter(course=linkedcourse)
 			for fac in linkedfac:
 				notify.send(request.user, recipient=Faculty.objects.get(username=fac.faculty.username), verb=subj, description=send_to+"_"+msg)	
@@ -154,5 +188,5 @@ def send_announcement(request):
  	# 			list3.append(i)	
  	# 	print list_course
  		ccourse=CurrentCourse.objects.get(course_code=course_code)
-		return render_to_response('faculty/newannounce.html',{"course_code":course_code},context)	
+		return render_to_response('faculty/newannounce.html',{"course_code":course_code,"course_name":ccourse.course_name},context)	
 

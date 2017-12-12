@@ -43,6 +43,9 @@ class Faculty(BaseUser):
 	def __init__(self,*args,**kwargs):
 		super(Faculty,self).__init__(*args,**kwargs)
 		self.utype = 'F'
+
+		
+
 	dept = models.ForeignKey(Department)
 	desgn = models.CharField(max_length=20)
 

@@ -1,0 +1,36 @@
+{% extends 'faculty/sidebar.html' %}
+{% block content %}
+<main class="mdl-layout__content mdl-color--grey-100">
+<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Subject</th>
+                        <th>Course</th>
+                        <th>Sent By</th>
+                        <th>Read status</th>
+                        <th>TimeStamp</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in unread_zip %}
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric" style="font-weight:bold;"><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox3 newBox">{{ item.2.verb }}</a></td>
+                        <td style="font-weight:bold;"><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox3 newBox">{{ item.0 }}</a></td>
+                        <td style="font-weight:bold;"><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox3 newBox">{{ item.2.actor.first_name }} {{ item.2.actor.last_name }}</a></td>
+                        <td><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox3 newBox"><i class="material-icons">email</i></a></td>
+                        <td style="font-weight:bold;"><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox3 newBox">{{ item.2.timestamp }}</a></td>
+                      </tr>
+                    {% endfor %}
+                    {% for item in read_zip %}
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox2 newBox">{{ item.2.verb }}</a></td>
+                        <td ><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox2 newBox">{{ item.0 }}</a></td>
+                        <td><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox2 newBox">{{ item.2.actor.first_name }} {{ item.2.actor.last_name }}</a></td>
+                        <td><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox2 newBox"><i class="material-icons">drafts</i></a></td>
+                        <td><a href="{% url 'courses:viewmessage' %}?id={{ item.2.id }}" class="myBox2 newBox">{{ item.2.timestamp }}</a></td>
+                      </tr>
+                    {% endfor %}                       
+                    </tbody>
+                  </table>
+                  </main>
+{% endblock %}

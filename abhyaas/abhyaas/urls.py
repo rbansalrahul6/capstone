@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^student/',include('students.urls',namespace="students")),
     url(r'^faculty/',include('faculty.urls', namespace="faculty")),
     url(r'^synch/',include('testapp.urls')),
-    url(r'^courses/',include('courses.urls')),
+    url(r'^courses/',include('courses.urls',namespace="courses")),
     url(r'logout/',logout_view,name='logout_the_user'),
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications'))
 )

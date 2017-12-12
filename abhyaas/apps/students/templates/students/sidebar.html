@@ -62,8 +62,10 @@
         <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
             <header class="demo-header mdl-layout__header mdl-color--blue-grey-800 mdl-color-text--grey-100">
                 <div class="mdl-layout__header-row">
+                <a href="/student/" class="mdl-layout-title mdl-color-text--grey-100 myBox newBox">
                     <span class="mdl-layout-title"> {{ user.first_name}}'s Dashboard</span>                                     
                 </div>
+                </a>
             </header>
             <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
                 <header class="demo-drawer-header">
@@ -76,11 +78,11 @@
                 <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 
 
-                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="" id="dashboard" onclick="bgcol("dashboard");"><i class="material-icons mdl-color-text--grey-100" role="presentation">dashboard</i>Dashboard</a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="/student/" id="dashboard" onclick="bgcol("dashboard");"><i class="material-icons mdl-color-text--grey-100" role="presentation">dashboard</i>Dashboard</a>
                     {% if unread_no %}
-                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="" id="inbox"><i class="material-icons mdl-color-text--grey-100" role="presentation" >email</i><span class="mdl-badge" data-badge="{{ unread_no }}">Inbox</span></a>
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="{% url 'students:showinbox' %}" id="inbox"><i class="material-icons mdl-color-text--grey-100" role="presentation" >email</i><span class="mdl-badge" data-badge="{{ unread_no }}">Inbox</span></a>
                     {% else %}
-                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="" id="inbox"><i class="material-icons mdl-color-text--grey-100" role="presentation" >email</i><span class="mdl-badge">Inbox</span></a>       
+                    <a class="mdl-navigation__link mdl-color-text--grey-100" href="{% url 'students:showinbox' %}" id="inbox"><i class="material-icons mdl-color-text--grey-100" role="presentation" >email</i><span class="mdl-badge">Inbox</span></a>       
                     {% endif %}
                     <a class="mdl-navigation__link mdl-color-text--grey-100" href="" id="settings"><i class="material-icons mdl-color-text--grey-100" role="presentation">settings</i>Settings</a>
 

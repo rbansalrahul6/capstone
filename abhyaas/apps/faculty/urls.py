@@ -9,5 +9,7 @@ urlpatterns = [
 	url(r'^upload/$',views.upload,name='upload'),
 	url(r'^announcement/$',views.show_announcement,name='showannouncement'),
 	url(r'^newannouncement/$',views.send_announcement,name='newannouncement'),
+	url(r'^inbox/$',views.show_inbox,name='showinbox'),
+	
 	#url(r'^sendannouncement/$',views.send_announcement,name='sendannouncement'),
 ]
