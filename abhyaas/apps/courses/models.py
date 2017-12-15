@@ -52,6 +52,7 @@ class Assignment(models.Model):
 	course = models.ForeignKey(CurrentCourse,on_delete=models.CASCADE)
 	uploader = models.ForeignKey(Faculty,on_delete=models.CASCADE)
 	deadline = models.DateField()
+	upload_date = models.DateField(auto_now_add=True)
 	filename = models.CharField(max_length=255)
 	instructions = models.TextField()
 	max_marks = models.PositiveIntegerField(default=0)
@@ -64,13 +65,14 @@ class AssignmentSubmission(models.Model):
 	assignment = models.ForeignKey(Assignment)
 	student = models.ForeignKey(Student,on_delete=models.CASCADE)
 	solution_file = models.CharField(max_length=255)
-	submit_date = models.DateField()
+	submit_date = models.DateField(auto_now_add=True)
 	STATUS_CHOICES = (
 		('S','Submitted'),
 		('E','Evaluated'),
 		)
 	status = models.CharField(max_length=2,choices=STATUS_CHOICES)
 	marks = models.PositiveIntegerField(default=0)
+	remarks = models.TextField(null=True,blank=True)
 	class Meta:
 		unique_together = ('student','assignment')	
 

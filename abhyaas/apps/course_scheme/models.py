@@ -50,4 +50,14 @@ class FacultyMapping(models.Model):
 	course_item = models.ForeignKey(CourseItem,on_delete=models.CASCADE) # no cascade maybe
 
 	def __str__(self):
-		return self.faculty.first_name                                                       
+		return self.faculty.first_name    
+
+class Subgroup(models.Model):
+	branch = models.ForeignKey(Branch)
+	year_dropdown = []
+	curr = datetime.datetime.now().year
+	for y in range(curr-4,curr+1):
+		year_dropdown.append((y,y))
+	
+	batch = models.IntegerField(choices=year_dropdown)
+	no_of_subgroups = models.PositiveIntegerField(default=0)                                                   

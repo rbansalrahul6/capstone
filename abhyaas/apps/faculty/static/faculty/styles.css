@@ -4,6 +4,7 @@ html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
+
 #view-source{
   position: fixed;
       display: block;
@@ -258,6 +259,16 @@ i.icon-white {
     color: rgba(0, 0, 0, 0.54);
     text-decoration: none;
 }
+.newBox:hover {
+    text-decoration: underline;
+}
+
+.rowBox{
+    display:block;  
+    color: rgba(0, 0, 0, 0.7);
+    text-decoration: none;
+}
+
 
 #new-message{
   margin-top: 7%;

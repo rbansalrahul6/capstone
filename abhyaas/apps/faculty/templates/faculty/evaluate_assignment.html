@@ -1,0 +1,53 @@
+{% extends 'faculty/sidebar_course.html' %}
+{% block content %}
+  <div style="margin-left: 2%;float:left;">
+    <h6>Sub-Group</h6>
+        <input type="select" class="mdl-selectfield__select" id="professsion1" name="professsion">
+          <option value=""></option>
+          <option value="option1">option 1</option>
+          <option value="option2">option 2</option>
+          <option value="option3">option 3</option>
+          <option value="option4">option 4</option>
+          <option value="option5">option 5</option>
+        
+  </div>
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:97%;">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Assignment</th>
+        <th>Uploaded By</th>
+        <th>Date Uploaded</th>
+        <th>Evaluate</th>
+      </tr>
+    </thead>
+    <!-- if statement to check empty list-->
+    {% if assgn_list %}
+    <tbody>
+    <!-- loop start here-->
+    {% for assgn in assgn_list %}
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+          <a href="#" class="newBox rowBox">{{assgn.name}}</a></td>
+        <td>
+          <a href="#" class="newBox rowBox">{{assgn.uploader.first_name}}</a></td>
+        <td>
+          <a href="#" class="newBox rowBox">{{assgn.upload_date}}</a></td>
+        <td>
+          <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+              Evaluate
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      <!--loop end here-->
+    </tbody>
+    {% endif %}
+  </table>               
+{% endblock %}
+{% block fab %}
+  <a href="{% url 'faculty:create_assignment' %}?code={{ course_code }}">      
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
+    <i class="large material-icons icon-white">file_upload</i>
+    </button> 
+  </a>           
+{% endblock %}

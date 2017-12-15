@@ -1,12 +1,10 @@
 
-
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-table {
-  width: 97%;
+table{
+  width:97%;
 }
-
 #view-source{
   position: fixed;
       display: block;
@@ -255,32 +253,16 @@ i.icon-white {
   color: white;
   background-color: #03A9F4; 
 }
-ul.breadcrumb {    
-    margin-left: -1px;
-    list-style: none;    
-}
-ul.breadcrumb li {
 
-    display: inline;
-    font-size: 18px;
-}
-ul.breadcrumb li+li:before {
-    padding: 8px;
-    color: #01447e;
-    content: ">";
-}
-ul.breadcrumb li a {
-    color: rgba(0, 0, 0, 0.54);
-    text-decoration: none;
-}
-ul.breadcrumb li a:hover {
-    color: #01447e;    
-}
 .myBox{
     display:inline-block;  
     color: rgba(0, 0, 0, 0.54);
     text-decoration: none;
 }
+.newBox:hover{
+  text-decoration: underline;
+}
+
 #new-message{
   margin-top: 7%;
   margin-left: 12%;
@@ -315,8 +297,65 @@ ul.breadcrumb li a:hover {
   margin-bottom: 1%;
 
 }
+#view-message{
+  margin-top: 4%;
+  margin-left: 12%;
+  width: 55%;
+  height: 60%;  
 
-.assign-new-button{
-  text-align: right;
 }
 
+
+
+.sender-pos{
+  margin-left: 9%;
+  margin-top: 5%;
+  
+  
+}
+
+.view-new-button{
+  text-align: right;
+  margin-top:10%;
+}
+
+.time-right{
+  text-align: right;  
+  margin-top: 2%;
+}
+
+
+
+/*view msg css end here*/
+
+
+/*css for new assign upload*/
+#new-assignment{
+  margin-top: 2%;
+  margin-left: 2%;
+  width: 96%;
+  height: 65%;
+}
+
+.combine-2-fields{
+  display: inline-block;
+}
+
+.instruct-pos{
+  width:92%;
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+#new-upload-id{
+  margin-left:50%; 
+  
+}
+
+
+#file_input_text_div_new {
+  width: 30%;  
+  margin-top: -8px;
+  margin-left: 5px;
+}
+/*css for new assign upload ends here*/

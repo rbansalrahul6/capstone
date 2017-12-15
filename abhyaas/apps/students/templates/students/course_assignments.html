@@ -1,10 +1,10 @@
 {% extends 'students/sidebar_course.html' %}
 {% block content %}
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:97%;">
                   <thead>
                     <tr>
                       <th class="mdl-data-table__cell--non-numeric">Assignment</th>
-                      <th>Marks</th>
+                      <th>Total Marks</th>
                       <th>Uploaded By</th>
                       <th>Deadline</th>
                       <th>Solution</th>
@@ -15,13 +15,15 @@
                   <tbody>
                   <!-- loop start here-->
                   <!-- unsubmitted -->
-                  {% for assgn in unsubmitted %}
+                  {% for assgn,alink in unsubmitted %}
                     <tr>
-                      <td class="mdl-data-table__cell--non-numeric">{{assgn.name}}</td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <a href="{{alink}}">{{assgn.name}}</a>
+                      </td>
                       <td>{{assgn.max_marks}}</td>
                       <td>{{assgn.uploader.first_name}}</td>
                       <td>{{assgn.deadline}}</td>
-                      <td>-</td>
+                      <td>NA</td>
                       <td>
                         <a href="{% url 'students:submit_assignment' %}?code={{ course_code }}&aname={{assgn.name}}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
                             Submit
@@ -31,14 +33,28 @@
                     {% endfor %}
                     <!--loop end here-->
                     <!-- submitted -->
-                    {% for asub in submitted %}
+                    {% for asub,alink,slink in submitted %}
                     <tr>
-                      <td class="mdl-data-table__cell--non-numeric">{{asub.assignment.name}}</td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <a href="{{alink}}">{{asub.assignment.name}}</a>
+                      </td>
                       <td>{{asub.assignment.max_marks}}</td>
                       <td>{{asub.assignment.uploader.first_name}}</td>
                       <td>{{asub.assignment.deadline}}</td>
-                      <td>{{asub.solution_file}}</td>
-                      <td>{{asub.status}}</td>
+                      <td>
+                        <a href="{{slink}}">{{asub.solution_file}}</a>
+                      </td>
+                      <td>
+                        <ul style="list-style: none;">
+                        {% ifequal asub.status 'S' %}
+                          <li>Submitted</li>
+                          <li>{{asub.submit_date}}</li>
+                        {% else %}
+                          <li>Evaluated</li>
+                          <li>{{asub.marks}}</li>
+                        {% endifequal %}
+                        </ul>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>

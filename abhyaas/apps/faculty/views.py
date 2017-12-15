@@ -13,7 +13,7 @@ from notifications.signals import notify
 import datetime
 import os
 import dropbox
-from utils.file_utils import upload_to_dropbox,check,create_folder
+from utils.file_utils import upload_to_dropbox,check,create_folder,get_download_link
 # Create your views here.
 @login_required(login_url="/login/login/")
 def index(request):
@@ -74,7 +74,7 @@ def upload(request):
 		if not check(dbx,course_code):
 			create_folder(dbx,course_code)
 		curr_time = datetime.datetime.now()
-		result = upload_to_dropbox(dbx,myfile,course_code,curr_time)
+		result = upload_to_dropbox(dbx,myfile,myfile.name,course_code,curr_time)
 		metadata = UploadMetadata(uploader=faculty,course=ccourse,
 			filename=myfile.name,upload_time=curr_time)
 		metadata.save()
@@ -160,11 +160,22 @@ def create_assignment(request):
 		ass_folder = os.path.join(course_code,'assignments')
 		if not check(dbx,ass_folder):
 			create_folder(dbx,ass_folder)
-		result = upload_to_dropbox(dbx,afile,course_code,datetime.datetime.now(),subfolder='assignments')
+		result = upload_to_dropbox(dbx,afile,afile.name,course_code,datetime.datetime.now(),subfolder='assignments')
 		assignment = Assignment(name=aname,course=ccourse,uploader=faculty,
 			deadline=ddate,filename=afile.name,instructions=insts,max_marks=mmarks)
 		assignment.save()
 		print result
 	data = {'course_code':course_code}
  	return render(request,'faculty/create_assignment.html',data)
+
+def view_assignment(request):
+	course_code = request.GET.get('code')
+	assgn_id = request.GET.get('aid')
+	assignment = Assignment.objects.get(id=assgn_id)
+	alink = get_download_link(dbx,course_code,assignment.filename,'assignments')
+	data = {'course_code':course_code,'assgn':assignment,'alink':alink}
+	return render(request,'faculty/view_assignment.html',data)
+
+def evaluate_assignment(request):
+	return render(request,'faculty/evaluate_assignment.html')
 

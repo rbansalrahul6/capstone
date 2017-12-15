@@ -4,10 +4,9 @@
                   <thead>
                     <tr>
                       <th class="mdl-data-table__cell--non-numeric">Assignment</th>
-                      <th>Marks</th>
                       <th>Uploaded By</th>
-                      <th>Deadline</th>
-                      <th>File</th>
+                      <th>Date Uploaded</th>
+                      <th>Evaluate</th>
                     </tr>
                   </thead>
                   <!-- if statement to check empty list-->
@@ -16,13 +15,15 @@
                   <!-- loop start here-->
                   {% for assgn in assgn_list %}
                     <tr>
-                      <td class="mdl-data-table__cell--non-numeric">{{assgn.name}}</td>
-                      <td>{{assgn.max_marks}}</td>
-                      <td>{{assgn.uploader.first_name}}</td>
-                      <td>{{assgn.deadline}}</td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox rowBox">{{assgn.name}}</a></td>
                       <td>
-                        <a href="/abcd">
-                            {{assgn.filename}}
+                        <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox rowBox">{{assgn.uploader.first_name}}</a></td>
+                      <td>
+                        <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox rowBox">{{assgn.upload_date}}</a></td>
+                      <td>
+                        <a href="{% url 'faculty:evaluate' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                            Evaluate
                         </a>
                       </td>
                     </tr>

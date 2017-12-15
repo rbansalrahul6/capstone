@@ -26,11 +26,11 @@ def create_folder(dbx,name):
 	path = '/' + name
 	dbx.files_create_folder(path)
 
-def upload_to_dropbox(dbx, file, folder,timestamp, subfolder='', overwrite=False):
+def upload_to_dropbox(dbx, file,name,folder,timestamp, subfolder='', overwrite=False):
     """Upload a file.
     Return the request response, or None in case of error.
     """
-    path = '/%s/%s/%s' % (folder, subfolder.replace(os.path.sep, '/'), file.name)
+    path = '/%s/%s/%s' % (folder, subfolder.replace(os.path.sep, '/'), name)
     while '//' in path:
         path = path.replace('//', '/')
     mode = (dropbox.files.WriteMode.overwrite
