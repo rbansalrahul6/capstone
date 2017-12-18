@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import force_text
-from .models import Course,CourseItem,CourseScheme,FacultyMapping
+from .models import Course,CourseItem,CourseScheme,FacultyMapping,Subgroup
 # Register your models here.
 
 class CourseItemInline(admin.StackedInline):
@@ -27,6 +27,9 @@ class FacultyInline(admin.StackedInline):
 	extra = 0
 	fields = ['faculty']
 
+class SubgroupAdmin(admin.ModelAdmin):
+	list_display = ('branch','batch','no_of_subgroups')	
+
 class CourseSchemeAdmin(admin.ModelAdmin):
 	save_on_top = True
 	fields = ['batch','semester','branch']
@@ -37,8 +40,13 @@ class CourseItemAdmin(admin.ModelAdmin):
 	fields = ['course_scheme','course','course_type','remarks','is_current']
 	inlines = [FacultyInline]
 
+class CourseAdmin(admin.ModelAdmin):
+	list_display = ['course_code','course_name']
+	
 
-admin.site.register(Course)
+
+admin.site.register(Course,CourseAdmin)
 admin.site.register(CourseItem,CourseItemAdmin)
 admin.site.register(CourseScheme,CourseSchemeAdmin)
 admin.site.register(FacultyMapping)
+admin.site.register(Subgroup,SubgroupAdmin)

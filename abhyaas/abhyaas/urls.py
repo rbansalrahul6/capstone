@@ -3,7 +3,8 @@ from django.contrib import admin
 from login.views import logout_view
 import notifications.urls
 
-
+admin.site.site_header='Abhyaas admin'
+admin.site.site_title='Abhyaas admin'
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'abhyaas.views.home', name='home'),

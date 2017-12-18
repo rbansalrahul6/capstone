@@ -2,11 +2,14 @@ from django.shortcuts import render,render_to_response
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import RequestContext,loader
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import user_passes_test
+from utils.file_utils import is_notadmin
 # Create your views here.
 
 
 def index(request):
 	return HttpResponse('welcome')
+
 
 def logout_view(request):
 	logout(request)
@@ -28,8 +31,10 @@ def user_login(request):
 				login(request,user)
 				if(user.utype == 'S'):
 					return HttpResponseRedirect('/student/')
-				else:
+				elif(user.utype=='F'):
 					return HttpResponseRedirect('/faculty/')
+				else:
+					return HttpResponse("Please contact admin")	
 			else:
 				return HttpResponse('account disabled')
 		else:
@@ -41,7 +46,9 @@ def user_login(request):
 		if request.user.is_authenticated():
 			if request.user.utype=='S':
 				return HttpResponseRedirect("/student/")
-			else:
+			elif request.user.utype=='F':
 				return HttpResponseRedirect("/faculty/")
+			else:
+				return HttpResponse("Please contact admin")		
 		else:		
 			return render_to_response('login/login.html',{},context)

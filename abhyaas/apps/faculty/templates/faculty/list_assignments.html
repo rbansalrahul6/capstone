@@ -1,0 +1,44 @@
+{% extends 'faculty/sidebar_course.html' %}
+{% block content %}
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" width=80%>
+                  <thead>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">Assignment</th>
+                      <th>Uploaded By</th>
+                      <th>Date Uploaded</th>
+                      <th>Evaluate</th>
+                    </tr>
+                  </thead>
+                  <!-- if statement to check empty list-->
+                  {% if assgn_list %}
+                  <tbody>
+                  <!-- loop start here-->
+                  {% for assgn in assgn_list %}
+                    <tr>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox myBox2">{{assgn.name}}</a></td>
+                      <td>
+                        <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox myBox2">{{assgn.uploader.first_name}} {{assgn.uploader.last_name}}</a></td>
+                      <td>
+                        <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox myBox2">{{assgn.upload_date}}</a></td>
+                      <td>
+                        <a href="{% url 'faculty:evaluate' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                            Evaluate
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    <!--loop end here-->
+                  </tbody>
+                  {% endif %}
+                </table>               
+{% endblock %}
+{% block fab %}
+
+              <a href="{% url 'faculty:create_assignment' %}?code={{ course_code }}">      
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
+                  <i class="large material-icons icon-white">file_upload</i>
+                </button> 
+                </a>           
+              
+{% endblock %}

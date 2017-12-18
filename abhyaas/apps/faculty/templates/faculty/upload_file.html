@@ -1,0 +1,69 @@
+{% extends 'faculty/sidebar_course.html' %}
+{% block content %}
+<div class="card-pos">
+
+              <div class="mdl-card mdl-shadow--6dp" id="new-file">
+
+                <div class="mdl-card__title mdl-color--blue-grey-900 mdl-color-text--grey-50">
+                  <h3 class="mdl-card__title-text">Upload to {{ course_code }} website</h3>
+                </div>
+
+                <div class="mdl-card__supporting-text">
+                <form id="upload_form" method="post" enctype="multipart/form-data">
+                {% csrf_token %} 
+                  <div class="mdl-card__actions">
+
+                    <div class="file_input_div">
+                      <div class="file_input">
+                        <label class="image_input_button mdl-button mdl-js-button  mdl-js-ripple-effect">
+                          <span>Choose File</span>
+                          <input id="file_input_file" class="none" type="file" name="myfile"/>
+                                
+                        </label>
+                      </div>
+                      <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
+                        <span>
+                        <input class="file_input_text mdl-textfield__input" type="text" disabled readonly id="file_input_text" />
+                        <label class="mdl-textfield__label" for="file_input_text"></label>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mdl-card__actions ">
+                    <input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" id="upload-id" value="Upload"/>
+                  </div>
+                  </form>
+                </div>  
+              </div>
+            </div>
+            <script type="text/javascript">
+            var fileInputTextDiv = document.getElementById('file_input_text_div');
+                    var fileInput = document.getElementById('file_input_file');
+                    var fileInputText = document.getElementById('file_input_text');
+                    fileInput.addEventListener('change', changeInputText);
+                    fileInput.addEventListener('change', changeState);
+                    function changeInputText() {
+                      var str = fileInput.value;
+                      var i;
+                      if (str.lastIndexOf('\\')) {
+                        i = str.lastIndexOf('\\') + 1;
+                      } else if (str.lastIndexOf('/')) {
+                        i = str.lastIndexOf('/') + 1;
+                      }
+                      var file = str.slice(i, str.length);
+                      fileInputText.value = file;
+                    }
+                    function changeState() {
+                      if (fileInputText.value.length != 0) {
+                        if (!fileInputTextDiv.classList.contains("is-focused")) {
+                          fileInputTextDiv.classList.add('is-focused');
+                        }
+                      } else {
+                        if (fileInputTextDiv.classList.contains("is-focused")) {
+                          fileInputTextDiv.classList.remove('is-focused');
+                        }
+                      }
+                    }
+            </script>  
+{% endblock %}

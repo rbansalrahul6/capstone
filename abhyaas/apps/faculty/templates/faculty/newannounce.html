@@ -26,11 +26,29 @@
                   <button class="mdl-button  mdl-js-button mdl-js-ripple-effect" style="color: white;
                   background-color: #F44336;" type="button">Cancel</button>
                   </a>
-                  <button class="mdl-button  mdl-js-button mdl-js-ripple-effect" id="" type="submit" name="submit">Send</button>
+                  <button class="mdl-button  mdl-js-button mdl-js-ripple-effect" id="demo-show-toast" type="submit" name="submit">Send</button>
+                  <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar text-snack">
+                    <div class="mdl-snackbar__text"></div>
+                    <button class="mdl-snackbar__action" type="button"></button>
+                  </div>
                 </div>
                   </form>
                 </div>
 
               </div>
             </div>
+
+<script>
+                    (function() {
+                      'use strict';
+                      window['counter'] = 0;
+                      var snackbarContainer = document.querySelector('#demo-toast-example');
+                      var showToastButton = document.querySelector('#demo-show-toast');
+                      showToastButton.addEventListener('click', function() {
+                        'use strict';
+                        var data = {message: 'Notfication sent'};
+                        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                      });
+                    }());
+</script>            
 {% endblock %}

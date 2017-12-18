@@ -302,7 +302,36 @@ i.icon-white {
   margin-top:10%;
 
 }
+#file_input_text_div_new {
+  width: 30%;
+  
+  margin-top: -8px;
+  margin-left: 5px;
+}
+#new-file{
+  margin-left: 22%;
+  margin-top: 7%;
+  width: 35%;
+  height: 40%;
+}
 
+
+.instruct-pos{
+  width:92%;
+  margin-top: 4%;
+  margin-left: 8%;
+}
+.file_input {
+  float: left;
+  margin-left: 4%;
+}
+
+
+#file_input_text_div {
+  width: 220px;
+  margin-top: -8px;
+  margin-left: 5px;
+}
 .text-pos{
   width: 600px;
   margin-left: 9%;

@@ -6,8 +6,9 @@ from login.models import Student,Faculty
 from .models import CurrentCourse,UploadMetadata,CourseNotification
 from django.contrib.auth.decorators import login_required,user_passes_test
 from .forms import UploadFileForm
+from django.conf import settings
 import dropbox
-from utils.file_utils import check,list_files,get_download_link
+from utils.file_utils import check,get_download_link,is_notadmin
 # Create your views here.
 access_token = 'oWw_iYHAydcAAAAAAAAA1UQIMnh-LpfBDd9mnqNlNcfTg5dCdepmD42C2htSajap'
 dbx = dropbox.Dropbox(access_token)
@@ -29,6 +30,7 @@ def getdesc_coursecode(notif):
  	return list_course,list3
 
 @login_required(login_url="/login/login/")
+@user_passes_test(is_notadmin,login_url='/login/login/')
 def index(request):
 	context = RequestContext(request)
 	course_code = request.GET.get('code')
@@ -41,8 +43,8 @@ def index(request):
 	data = {'course_code':course_code,'course_files':course_files,'course_name':ccourse.course_name}
 	return TemplateResponse(request,'courses/course_page.html',data)
 
-
 @login_required(login_url="/login/login/")
+@user_passes_test(is_notadmin,login_url='/login/login/')
 def show_courses(request,user_model,course_map):
 	context = RequestContext(request)
 	courses = None
@@ -58,6 +60,7 @@ def show_courses(request,user_model,course_map):
 	return TemplateResponse(request,'courses/list_courses.html',data)
 
 @login_required(login_url="/login/login/")
+@user_passes_test(is_notadmin,login_url='/login/login/')
 def view_announcement(request):
 	context=RequestContext(request)
 	course_code = request.GET.get('code')
@@ -71,6 +74,7 @@ def view_announcement(request):
 		return render_to_response('students/viewannounce_page.html',data,context)		
 
 @login_required(login_url="/login/login/")
+@user_passes_test(is_notadmin,login_url='/login/login/')
 def view_message(request):
 	context=RequestContext(request)
 	if request.user.utype=='S':
