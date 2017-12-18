@@ -22,7 +22,7 @@
                       <td>
                         <a href="{% url 'faculty:view_assignment' %}?code={{course_code}}&aid={{assgn.id}}" class="newBox myBox2">{{assgn.upload_date}}</a></td>
                       <td>
-                        <a href="{% url 'faculty:evaluate' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                        <a href="{% url 'faculty:evaluate' %}?code={{course_code}}&aid={{assgn.id}}" class="mdl-button mdl-js-button mdl-js-ripple-effect">
                             Evaluate
                         </a>
                       </td>
@@ -37,7 +37,7 @@
 
               <a href="{% url 'faculty:create_assignment' %}?code={{ course_code }}">      
                 <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
-                  <i class="large material-icons icon-white">file_upload</i>
+                  <i class="large material-icons icon-white">note_add</i>
                 </button> 
                 </a>           
               

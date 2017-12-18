@@ -1,40 +1,50 @@
 {% extends 'faculty/sidebar_course.html' %}
 {% block content %}
-  <div style="margin-left: 2%;float:left;">
-    <h6>Sub-Group</h6>
-        <input type="select" class="mdl-selectfield__select" id="professsion1" name="professsion">
-          <option value=""></option>
-          <option value="option1">option 1</option>
-          <option value="option2">option 2</option>
-          <option value="option3">option 3</option>
-          <option value="option4">option 4</option>
-          <option value="option5">option 5</option>
-        
-  </div>
+<style>
+ul#group li{
+  display:inline;
+}
+</style>
+   <ul id="group">
+                <li style="font-size:20px; text-align:center; margin-left: 35%;"><b>Assignment: {{aname}}</b></li><br/>              
+                
+                <form method="post" >
+                <li style="font-size:18px;">Sub-Group:</li>
+                {% csrf_token %}                 
+                <li>               
+                  <select class="mdl-selectfield__select mdl-selectfield mdl-js-selectfield" id="professsion1" name="sub" style="margin-top:2%; margin-left:1%;">
+                  <option value=""></option>
+                  {% for i in slist %}
+                    <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+                  </select>          
+                </li>
+                <li>
+                  <input class="mdl-button  mdl-js-button mdl-js-ripple-effect"style="margin-left:2%;" type="submit" value="Submit"/>
+                </li>
+                </form>              
+            </ul>  
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:97%;">
     <thead>
       <tr>
-        <th class="mdl-data-table__cell--non-numeric">Assignment</th>
-        <th>Uploaded By</th>
-        <th>Date Uploaded</th>
+        <th class="mdl-data-table__cell--non-numeric">Roll No</th>
+        <th>Date Submitted</th>
         <th>Evaluate</th>
       </tr>
     </thead>
     <!-- if statement to check empty list-->
-    {% if assgn_list %}
+    {% if assign %}
     <tbody>
     <!-- loop start here-->
-    {% for assgn in assgn_list %}
+    {% for a in assign %}
       <tr>
         <td class="mdl-data-table__cell--non-numeric">
-          <a href="#" class="newBox rowBox">{{assgn.name}}</a></td>
+          {{a.student.username}}</td>
         <td>
-          <a href="#" class="newBox rowBox">{{assgn.uploader.first_name}}</a></td>
+          {{a.submit_date}}</td>
         <td>
-          <a href="#" class="newBox rowBox">{{assgn.upload_date}}</a></td>
-        <td>
-          <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">
-              Evaluate
+          <a href="{% url 'faculty:grade' %}?code={{course_code}}&subid={{a.id}}" class="">
+              <i class="material-icons">create</i>
           </a>
         </td>
       </tr>
@@ -43,11 +53,4 @@
     </tbody>
     {% endif %}
   </table>               
-{% endblock %}
-{% block fab %}
-  <a href="{% url 'faculty:create_assignment' %}?code={{ course_code }}">      
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="view-source">
-    <i class="large material-icons icon-white">file_upload</i>
-    </button> 
-  </a>           
 {% endblock %}

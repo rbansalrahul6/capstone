@@ -47,11 +47,11 @@
                       <td>
                         <ul style="list-style: none;">
                         {% ifequal asub.status 'S' %}
-                          <li>Submitted</li>
+                          <li style="color:#FFAB00;">Submitted</li>
                           <li>{{asub.submit_date}}</li>
                         {% else %}
-                          <li>Evaluated</li>
-                          <li>{{asub.marks}}</li>
+                          <li style="color:#4CAF50;">Evaluated</li>
+                          <li>Marks: {{asub.marks}}</li>
                         {% endifequal %}
                         </ul>
                       </td>

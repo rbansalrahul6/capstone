@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from courses.models import CourseStudentMap,CurrentCourse,CourseNotification,Assignment,AssignmentSubmission
 from login.models import Student
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from courses import views as course_views
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 from django.conf import settings
 import os
 import dropbox
@@ -144,17 +144,19 @@ def submit_assignment(request):
 	student = Student.objects.get(username=request.user.username)
 	alink = get_download_link(dbx,course_code,assignment.filename,'assignments')
 	sfile = None
+	data = {'assgn':assignment,'course_code':course_code,'alink':alink}
 	if request.method=='POST' and request.FILES['sfile']:
 		sfile = request.FILES['sfile']
-	if sfile is not None:
-		sub_folder = os.path.join(course_code,'submissions')
-		if not check(dbx,sub_folder):
-			create_folder(dbx,sub_folder)
-		filename = student.username + '|' + sfile.name
-		result = upload_to_dropbox(dbx,sfile,filename,course_code,datetime.datetime.now(),subfolder='submissions')
-		asub = AssignmentSubmission(assignment=assignment,student=student,solution_file=sfile.name,
-			status='S')
-		asub.save()
-		print result
-	data = {'assgn':assignment,'course_code':course_code,'alink':alink}
-	return render(request,'students/submit_assignment.html',data)		
+		if sfile is not None:
+			sub_folder = os.path.join(course_code,'submissions')
+			if not check(dbx,sub_folder):
+				create_folder(dbx,sub_folder)
+			filename = student.username + '|' + sfile.name
+			result = upload_to_dropbox(dbx,sfile,filename,course_code,datetime.datetime.now(),subfolder='submissions')
+			asub = AssignmentSubmission(assignment=assignment,student=student,solution_file=sfile.name,
+				status='S')
+			asub.save()
+			print result
+		return HttpResponseRedirect("%s?code=%s" % (reverse('student:assignments'),course_code))
+	else:	
+		return render(request,'students/submit_assignment.html',data)		

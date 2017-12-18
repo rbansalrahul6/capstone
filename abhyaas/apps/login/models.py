@@ -33,6 +33,7 @@ class Student(BaseUser):
 	sem_list = range(1,9)
 	SEMESTER_CHOICES = tuple(zip(sem_list,sem_list))
 	semester = models.IntegerField(choices=SEMESTER_CHOICES,default=1)
+	subgroup=models.CharField(max_length=8)
 	#self.username.verbose_name='RollNo'
 
 	class Meta:

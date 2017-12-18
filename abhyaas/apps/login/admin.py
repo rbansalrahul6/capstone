@@ -87,7 +87,7 @@ class StudentAdmin(CommonAdmin):
 			),
 		)
 	fieldsets =  (
-            (None, {'fields': ('branch',)}),
+            (None, {'fields': ('username','first_name','last_name','subgroup','batch','branch',)}),
     )
 	#form = SimpleStudentForm
 
@@ -99,7 +99,7 @@ class FacultyAdmin(CommonAdmin):
 			),
 		)
 	fieldsets =  (
-            (None, {'fields': ('dept',)}),
+            (None, {'fields': ('username','first_name','last_name','dept',)}),
     )
 	#form = FacultyForm
 
